@@ -1,3 +1,4 @@
 export interface IDocumentVerifier {
-    verify(): void;
+    verify(documentId:number): void;
+    getImageContent()
 }
