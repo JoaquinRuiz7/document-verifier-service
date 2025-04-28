@@ -1,0 +1,26 @@
+import { LegalDocument } from '../../../core/entities/legal.document';
+import { LegalDocument as LegalDocumentEntity } from '../model/legal.document.entity';
+
+export class LegalDocumentMapper {
+    public static toEntity(legalDocument: LegalDocument): LegalDocumentEntity {
+        const entity = new LegalDocumentEntity();
+        entity.id = legalDocument.id;
+        entity.userId = legalDocument.userId;
+        entity.documentKey = legalDocument.key;
+        entity.documentType = legalDocument.documentType;
+        entity.createdAt = legalDocument.createdAt;
+        entity.updatedAt = new Date();
+        return entity;
+    }
+
+    public static toDomain(entity: LegalDocumentEntity): LegalDocument {
+        const domain = new LegalDocument();
+        domain.id = entity.id;
+        domain.userId = entity.userId;
+        domain.key = entity.documentKey;
+        domain.documentType = entity.documentType;
+        domain.createdAt = entity.createdAt;
+        domain.updatedAt = entity.updatedAt;
+        return domain;
+    }
+}
