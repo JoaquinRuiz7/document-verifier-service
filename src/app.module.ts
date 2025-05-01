@@ -5,6 +5,9 @@ import { InfrastructureModule } from './infrastructure/infrastructure.module';
 import { ApplicationModule } from './application/application.module';
 import { DatabaseModule } from './infrastructure/config/database/database.module';
 import { ConfigModule } from '@nestjs/config';
+import { DocumentController } from './presentation/controllers/document.controller';
+import { GetReliabilityReportUseCase } from './application/usecases/get.reliability.report.use.case';
+import { useCaseProviders } from './infrastructure/providers/verify.document.usecase.provider';
 
 @Module({
     imports: [
@@ -15,7 +18,8 @@ import { ConfigModule } from '@nestjs/config';
         ApplicationModule,
         DatabaseModule,
     ],
-    controllers: [AppController],
-    providers: [AppService],
+    exports: [...useCaseProviders],
+    controllers: [AppController, DocumentController],
+    providers: [AppService, GetReliabilityReportUseCase, ...useCaseProviders],
 })
 export class AppModule {}

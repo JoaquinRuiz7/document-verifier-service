@@ -1,3 +1,3 @@
 export interface IStorage {
-  getObject(key:string);
+    getObject(key: string);
 }

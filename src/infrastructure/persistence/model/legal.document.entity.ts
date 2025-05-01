@@ -1,17 +1,9 @@
-import {
-    BeforeInsert,
-    BeforeUpdate,
-    Column,
-    CreateDateColumn,
-    Entity,
-    PrimaryGeneratedColumn,
-    UpdateDateColumn,
-} from 'typeorm';
+import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { DocumentType } from '../../../core/enums/document.type';
 
 @Entity({ name: 'user_legal_documents' })
 export class LegalDocument {
-    @PrimaryGeneratedColumn()
+    @PrimaryGeneratedColumn({ name: 'id' })
     private _id: number;
     @Column({ name: 'user_id' })
     private _userId: number;
