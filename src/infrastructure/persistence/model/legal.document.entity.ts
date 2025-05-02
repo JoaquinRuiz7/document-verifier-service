@@ -16,6 +16,8 @@ export class LegalDocument {
     private _verified: boolean;
     @Column({ name: 'valid_until' })
     private _validUntil: number;
+    @Column({ name: 'is_expired' })
+    private _isExpired: boolean;
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' }) private _createdAt: Date;
     @UpdateDateColumn({ name: 'updated_at', type: 'timestamp with time zone' }) private _updatedAt: Date;
@@ -82,5 +84,13 @@ export class LegalDocument {
 
     set validUntil(value: number) {
         this._validUntil = value;
+    }
+
+    get isExpired(): boolean {
+        return this._isExpired;
+    }
+
+    set isExpired(value: boolean) {
+        this._isExpired = value;
     }
 }

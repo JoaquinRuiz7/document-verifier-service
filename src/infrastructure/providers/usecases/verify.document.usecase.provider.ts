@@ -8,9 +8,7 @@ import { IDocumentRepository } from '../../../core/interfaces/repository/i.docum
 import { IAnalyzeKeywords } from '../../../application/interfaces/i.analyze.keywords';
 import { AnalyzeKeywordsService } from '../../../application/services/analyze.keywords.service';
 import { IStorage } from '../../../core/interfaces/storage/i.storage';
-import {
-    IOpticalCharacterRecognitionProcessor,
-} from '../../../core/interfaces/domain/i.optical.character.recognition.processor';
+import { IOpticalCharacterRecognitionProcessor } from '../../../core/interfaces/domain/i.optical.character.recognition.processor';
 import { IDocumentVerifier } from '../../../core/interfaces/domain/i.document.verifier';
 
 export const reliabilityReportRepositoryProvider = {

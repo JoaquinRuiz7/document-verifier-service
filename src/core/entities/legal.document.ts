@@ -1,4 +1,5 @@
 import { DocumentType } from '../enums/document.type';
+import postgres from 'postgres';
 
 export class LegalDocument {
     private _id: number;
@@ -7,6 +8,7 @@ export class LegalDocument {
     private _key: string;
     private _validUntil: number;
     private _verified: boolean;
+    private _isExpired: boolean;
     private _createdAt: Date;
     private _updatedAt: Date;
 
@@ -72,5 +74,13 @@ export class LegalDocument {
 
     set verified(value: boolean) {
         this._verified = value;
+    }
+
+    get isExpired(): boolean {
+        return this._isExpired;
+    }
+
+    set isExpired(value: boolean) {
+        this._isExpired = value;
     }
 }

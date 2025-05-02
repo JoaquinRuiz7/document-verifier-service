@@ -13,6 +13,7 @@ export class AnalyzeKeywordsService implements IAnalyzeKeywords {
     public async analyze(documentKey: string): Promise<AnalyzeKeywordsResponse> {
         const buffer: Buffer = await this.storage.getObject(documentKey);
         const words: string[] = await this.ocr.readImageAndExtractText(buffer);
+
         if (words.length === 0)
             return {
                 isExpired: false,
