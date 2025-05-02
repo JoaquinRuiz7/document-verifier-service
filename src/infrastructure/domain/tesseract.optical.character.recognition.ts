@@ -2,7 +2,7 @@ import { createWorker } from 'tesseract.js';
 import fetch from 'node-fetch';
 import { IOpticalCharacterRecognitionProcessor } from '../../core/interfaces/domain/i.optical.character.recognition.processor';
 import { Injectable } from '@nestjs/common';
-import * as sharp from 'sharp'
+import * as sharp from 'sharp';
 
 @Injectable()
 export class TesseractIOpticalCharacterRecognition implements IOpticalCharacterRecognitionProcessor {
@@ -10,18 +10,18 @@ export class TesseractIOpticalCharacterRecognition implements IOpticalCharacterR
 
     async preProcess(imageBuffer: Buffer): Promise<Buffer> {
         return await sharp(imageBuffer)
-          .resize({ width: 1200, withoutEnlargement: true })
-          .greyscale()
-          .normalize()
-          .toFormat('png')
-          .toBuffer();
+            .resize({ width: 1200, withoutEnlargement: true })
+            .greyscale()
+            .normalize()
+            .toFormat('png')
+            .toBuffer();
     }
 
     async readImageAndExtractText(imageUrl: string): Promise<string[]> {
         const response = await fetch(imageUrl);
         if (!response.ok) throw new Error('Failed to fetch image');
         const buffer: Buffer = await response.buffer();
-        const enhancedImage:Buffer = await this.preProcess(buffer);
+        const enhancedImage: Buffer = await this.preProcess(buffer);
 
         const worker = await createWorker('spa');
 

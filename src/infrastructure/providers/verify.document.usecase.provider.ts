@@ -7,6 +7,8 @@ import { IDocumentRepository } from '../../core/interfaces/repository/i.document
 import { IOpticalCharacterRecognitionProcessor } from '../../core/interfaces/domain/i.optical.character.recognition.processor';
 import { IneDocumentVerifierImpl } from '../domain/ine.document.verifier.impl';
 import { IDocumentVerifier } from '../../core/interfaces/domain/i.document.verifier';
+import { ReliabilityReportRepository } from '../persistence/repository/reliability.report.repository';
+import { IReliabilityReportRepository } from '../../core/interfaces/repository/i.reliability.report.repository';
 
 export const documentRepositoryProvider = {
     provide: 'DocumentRepository',
@@ -23,13 +25,19 @@ export const documentVerifierProvider = {
     useClass: IneDocumentVerifierImpl,
 };
 
+export const reliabilityReportRepositoryProvider = {
+    provide: 'IReliabilityReportRepository',
+    useClass: ReliabilityReportRepository,
+};
+
 export const verifyDocumentUseCaseProvider = {
     provide: 'GetReliabilityReportUsecase',
     useFactory: (
         documentRepo: IDocumentRepository,
         ocrProcessor: IOpticalCharacterRecognitionProcessor,
         documentVerifier: IDocumentVerifier,
-    ) => new GetReliabilityReportUseCase(documentRepo, ocrProcessor, documentVerifier),
+        reliabilityReportRepository: IReliabilityReportRepository,
+    ) => new GetReliabilityReportUseCase(documentRepo, ocrProcessor, documentVerifier, reliabilityReportRepository),
     inject: ['DocumentRepository', 'OCRProcessor', 'DocumentVerifier'],
 };
 
@@ -38,4 +46,5 @@ export const useCaseProviders = [
     tesseractOpticalCharacterRecognitionProvider,
     documentVerifierProvider,
     verifyDocumentUseCaseProvider,
+    reliabilityReportRepositoryProvider,
 ];

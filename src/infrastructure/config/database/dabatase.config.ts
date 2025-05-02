@@ -1,11 +1,20 @@
 import { DatabaseConstants } from './database.constants';
 import { DataSource } from 'typeorm';
 import { LegalDocument } from '../../persistence/model/legal.document.entity';
+import { ReliabilityReportEntity } from '../../persistence/model/reliability.report.entity';
 
 export const legalDocumentsProvider = [
     {
         provide: DatabaseConstants.USERS_LEGAL_DOCUMENTS_REPOSITORY,
         useFactory: (dataSource: DataSource) => dataSource.getRepository(LegalDocument),
+        inject: [DatabaseConstants.DATA_SOURCE],
+    },
+];
+
+export const ineReliabilityReportProvider = [
+    {
+        provide: DatabaseConstants.INE_RELIABILITY_REPORT_REPOSITORY,
+        useFactory: (dataSource: DataSource) => dataSource.getRepository(ReliabilityReportEntity),
         inject: [DatabaseConstants.DATA_SOURCE],
     },
 ];

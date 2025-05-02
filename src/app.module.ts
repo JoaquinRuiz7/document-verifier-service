@@ -8,6 +8,7 @@ import { ConfigModule } from '@nestjs/config';
 import { DocumentController } from './presentation/controllers/document.controller';
 import { GetReliabilityReportUseCase } from './application/usecases/get.reliability.report.use.case';
 import { useCaseProviders } from './infrastructure/providers/verify.document.usecase.provider';
+import { BullModule } from '@nestjs/bullmq';
 
 @Module({
     imports: [
@@ -17,6 +18,12 @@ import { useCaseProviders } from './infrastructure/providers/verify.document.use
         InfrastructureModule,
         ApplicationModule,
         DatabaseModule,
+        BullModule.forRoot({
+            connection: {
+                host: 'localhost',
+                port: 6379,
+            },
+        }),
     ],
     exports: [...useCaseProviders],
     controllers: [AppController, DocumentController],

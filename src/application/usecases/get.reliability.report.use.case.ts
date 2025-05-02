@@ -3,6 +3,8 @@ import { LegalDocument } from '../../core/entities/legal.document';
 import { IOpticalCharacterRecognitionProcessor } from '../../core/interfaces/domain/i.optical.character.recognition.processor';
 import { IGetReliabilityReportUseCase } from '../interfaces/i.get.reliability.report.use.case';
 import { AnalyzeKeywordsResponse, IDocumentVerifier } from '../../core/interfaces/domain/i.document.verifier';
+import { IReliabilityReportRepository } from '../../core/interfaces/repository/i.reliability.report.repository';
+import { IneReliabilityReport } from '../../core/entities/ine.reliability.report';
 
 export class GetReliabilityReportUseCase implements IGetReliabilityReportUseCase {
     private readonly KEY_WORDS: string[] = [
@@ -34,6 +36,7 @@ export class GetReliabilityReportUseCase implements IGetReliabilityReportUseCase
         private readonly documentRepository: IDocumentRepository,
         private readonly opticalCharacterRecognition: IOpticalCharacterRecognitionProcessor,
         private readonly documentVerifier: IDocumentVerifier,
+        private readonly reliabilityReportRepository: IReliabilityReportRepository,
     ) {}
 
     public async getReliabilityReport(
@@ -51,6 +54,13 @@ export class GetReliabilityReportUseCase implements IGetReliabilityReportUseCase
         );
 
         const isExpired: boolean = this.documentVerifier.isExpired(words);
+        const reliabilityReport: IneReliabilityReport = new IneReliabilityReport();
+        const percentage: number = analyzeKeywordsResponse.percentage;
+        reliabilityReport.documentId = document.id;
+        reliabilityReport.reliabilityPercentage = percentage;
+        reliabilityReport.verified = percentage > 90;
+        this.reliabilityReportRepository.save(reliabilityReport);
+
         return { reliabilityPercentage: analyzeKeywordsResponse.percentage, isExpired: isExpired };
     }
 }
