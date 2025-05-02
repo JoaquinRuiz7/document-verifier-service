@@ -44,5 +44,4 @@ export class IneReliabilityReport {
     set updatedAt(value: Date) {
         this._updatedAt = value;
     }
-
 }

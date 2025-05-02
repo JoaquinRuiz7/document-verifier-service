@@ -2,10 +2,11 @@ export type AnalyzeKeywordsResponse = {
     found: string[];
     missing: string[];
     percentage: number;
-    lastvalidYear: number;
+    lastValidYear: number;
+    isExpired: boolean;
 };
 
 export interface IDocumentVerifier {
-    analyzeKeywords(keywords: string[], words: string[]): AnalyzeKeywordsResponse;
+    analyzeKeywords(words: string[]): AnalyzeKeywordsResponse;
     isExpired(words: string[]): boolean;
 }

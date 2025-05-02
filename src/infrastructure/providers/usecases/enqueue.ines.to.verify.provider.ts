@@ -1,9 +1,9 @@
 // src/infrastructure/providers/usecase.providers.ts
 
-import { DocumentRepository } from '../persistence/repository/document.repository';
-import { IDocumentRepository } from '../../core/interfaces/repository/i.document.repository';
-import { IneJobService } from '../jobs/ine.job.service';
-import { EnqueueInesToVerifyUseCase } from '../../application/usecases/enqueue.ines.to.verify';
+import { DocumentRepository } from '../../persistence/repository/document.repository';
+import { IDocumentRepository } from '../../../core/interfaces/repository/i.document.repository';
+import { IneJobService } from '../../jobs/ine.job.service';
+import { EnqueueInesToVerifyUseCase } from '../../../application/usecases/enqueue.ines.to.verify';
 
 export const documentRepositoryProvider = {
     provide: 'DocumentRepository',

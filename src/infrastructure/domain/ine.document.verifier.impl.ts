@@ -3,13 +3,39 @@ import { AnalyzeKeywordsResponse, IDocumentVerifier } from '../../core/interface
 
 @Injectable()
 export class IneDocumentVerifierImpl implements IDocumentVerifier {
-    analyzeKeywords(keywords: string[], words: string[]): AnalyzeKeywordsResponse {
+    private readonly KEY_WORDS: string[] = [
+        'curp',
+        'instituto',
+        'nacional',
+        'electoral',
+        'credencial',
+        'para',
+        'votar',
+        'méxico',
+        'clave',
+        'de',
+        'elector',
+        'año',
+        'registro',
+        'domicilio',
+        'fecha',
+        'nacimiento',
+        'estado',
+        'municipio',
+        'sección',
+        'localidad',
+        'vicencia',
+        'emisión',
+    ];
+
+    analyzeKeywords(words: string[]): AnalyzeKeywordsResponse {
         const lowerWords = words.map((w) => w.toLowerCase());
+        const keywords = this.KEY_WORDS;
         const found = keywords.filter((kw) => lowerWords.includes(kw.toLowerCase()));
         const missing = keywords.filter((kw) => !lowerWords.includes(kw.toLowerCase()));
         const percentage = Math.ceil((found.length / keywords.length) * 100);
         const { lastValidYear } = this.getYears(words);
-        return { found, missing, percentage, lastvalidYear: Number(lastValidYear) };
+        return { found, missing, percentage, lastValidYear: Number(lastValidYear), isExpired: this.isExpired(words) };
     }
 
     isExpired(words: string[]): boolean {
