@@ -9,6 +9,7 @@ import { DocumentController } from './presentation/controllers/document.controll
 import { GetReliabilityReportUseCase } from './application/usecases/get.reliability.report.use.case';
 import { useCaseProviders } from './infrastructure/providers/verify.document.usecase.provider';
 import { BullModule } from '@nestjs/bullmq';
+import { S3Provider } from './infrastructure/storage/s3.provider';
 
 @Module({
     imports: [
@@ -27,6 +28,6 @@ import { BullModule } from '@nestjs/bullmq';
     ],
     exports: [...useCaseProviders],
     controllers: [AppController, DocumentController],
-    providers: [AppService, GetReliabilityReportUseCase, ...useCaseProviders],
+    providers: [AppService, GetReliabilityReportUseCase, ...useCaseProviders, S3Provider],
 })
 export class AppModule {}

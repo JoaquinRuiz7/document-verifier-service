@@ -17,11 +17,8 @@ export class TesseractIOpticalCharacterRecognition implements IOpticalCharacterR
             .toBuffer();
     }
 
-    async readImageAndExtractText(imageUrl: string): Promise<string[]> {
-        const response = await fetch(imageUrl);
-        if (!response.ok) throw new Error('Failed to fetch image');
-        const buffer: Buffer = await response.buffer();
-        const enhancedImage: Buffer = await this.preProcess(buffer);
+    async readImageAndExtractText(image: Buffer): Promise<string[]> {
+        const enhancedImage: Buffer = await this.preProcess(image);
 
         const worker = await createWorker('spa');
 

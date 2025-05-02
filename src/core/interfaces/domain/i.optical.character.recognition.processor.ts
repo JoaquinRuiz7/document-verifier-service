@@ -1,5 +1,5 @@
 export interface IOpticalCharacterRecognitionProcessor {
-    readImageAndExtractText(imageUrl: string): Promise<string[]>;
+    readImageAndExtractText(imageUrl: Buffer): Promise<string[]>;
     extractWordsOrdered(): string[];
     cleanAndOrderWords(): string[];
     preProcess(imageBuffer: Buffer): Promise<Buffer>;

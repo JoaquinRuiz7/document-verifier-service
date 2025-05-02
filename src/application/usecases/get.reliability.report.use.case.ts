@@ -5,6 +5,7 @@ import { IGetReliabilityReportUseCase } from '../interfaces/i.get.reliability.re
 import { AnalyzeKeywordsResponse, IDocumentVerifier } from '../../core/interfaces/domain/i.document.verifier';
 import { IReliabilityReportRepository } from '../../core/interfaces/repository/i.reliability.report.repository';
 import { IneReliabilityReport } from '../../core/entities/ine.reliability.report';
+import { IStorage } from '../../core/interfaces/storage/i.storage';
 
 export class GetReliabilityReportUseCase implements IGetReliabilityReportUseCase {
     private readonly KEY_WORDS: string[] = [
@@ -37,13 +38,15 @@ export class GetReliabilityReportUseCase implements IGetReliabilityReportUseCase
         private readonly opticalCharacterRecognition: IOpticalCharacterRecognitionProcessor,
         private readonly documentVerifier: IDocumentVerifier,
         private readonly reliabilityReportRepository: IReliabilityReportRepository,
+        private readonly storage: IStorage,
     ) {}
 
     public async getReliabilityReport(
         documentId: number,
     ): Promise<{ reliabilityPercentage: number; isExpired: boolean }> {
         const document: LegalDocument = await this.documentRepository.getById(documentId);
-        const words: string[] = await this.opticalCharacterRecognition.readImageAndExtractText(document.key);
+        const documentBuffer: Buffer = await this.storage.getObject(document.key);
+        const words: string[] = await this.opticalCharacterRecognition.readImageAndExtractText(documentBuffer);
 
         if (words.length == 0) {
             return { reliabilityPercentage: 0, isExpired: false };

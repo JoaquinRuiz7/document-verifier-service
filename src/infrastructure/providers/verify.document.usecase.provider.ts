@@ -9,6 +9,8 @@ import { IneDocumentVerifierImpl } from '../domain/ine.document.verifier.impl';
 import { IDocumentVerifier } from '../../core/interfaces/domain/i.document.verifier';
 import { ReliabilityReportRepository } from '../persistence/repository/reliability.report.repository';
 import { IReliabilityReportRepository } from '../../core/interfaces/repository/i.reliability.report.repository';
+import { S3Storage } from '../storage/s3.storage';
+import { IStorage } from '../../core/interfaces/storage/i.storage';
 
 export const documentRepositoryProvider = {
     provide: 'DocumentRepository',
@@ -30,6 +32,11 @@ export const reliabilityReportRepositoryProvider = {
     useClass: ReliabilityReportRepository,
 };
 
+export const storageProvider = {
+    provide: 'IStorage',
+    useClass: S3Storage,
+};
+
 export const verifyDocumentUseCaseProvider = {
     provide: 'GetReliabilityReportUsecase',
     useFactory: (
@@ -37,8 +44,16 @@ export const verifyDocumentUseCaseProvider = {
         ocrProcessor: IOpticalCharacterRecognitionProcessor,
         documentVerifier: IDocumentVerifier,
         reliabilityReportRepository: IReliabilityReportRepository,
-    ) => new GetReliabilityReportUseCase(documentRepo, ocrProcessor, documentVerifier, reliabilityReportRepository),
-    inject: ['DocumentRepository', 'OCRProcessor', 'DocumentVerifier'],
+        storage: IStorage,
+    ) =>
+        new GetReliabilityReportUseCase(
+            documentRepo,
+            ocrProcessor,
+            documentVerifier,
+            reliabilityReportRepository,
+            storage,
+        ),
+    inject: ['DocumentRepository', 'OCRProcessor', 'DocumentVerifier', 'IReliabilityReportRepository', 'IStorage'],
 };
 
 export const useCaseProviders = [
@@ -47,4 +62,5 @@ export const useCaseProviders = [
     documentVerifierProvider,
     verifyDocumentUseCaseProvider,
     reliabilityReportRepositoryProvider,
+    storageProvider,
 ];
