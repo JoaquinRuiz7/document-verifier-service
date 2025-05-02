@@ -21,7 +21,7 @@ export class VerifyIneConsumer extends WorkerHost {
             this.logger.log(`Processing document with key ${key}`);
             // @ts-ignore
             await this.getReliabilityReportUseCase.getReliabilityReport(data.documentId);
-            this.logger.log(`Document with key ${key} finished processing successfully}`);
+            this.logger.log(`Document with key ${key} finished processing successfully.`);
         } catch (e) {
             this.logger.error(`Error processing document with key ${job.data.key}`);
             this.logger.error(e);

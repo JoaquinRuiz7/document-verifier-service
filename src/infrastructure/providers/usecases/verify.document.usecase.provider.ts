@@ -11,13 +11,6 @@ import { IStorage } from '../../../core/interfaces/storage/i.storage';
 import { IOpticalCharacterRecognitionProcessor } from '../../../core/interfaces/domain/i.optical.character.recognition.processor';
 import { IDocumentVerifier } from '../../../core/interfaces/domain/i.document.verifier';
 
-export const analyzeKeywordsServiceProvider = {
-    provide: 'IAnalyzeKeywords',
-    useFactory: (storage: IStorage, ocr: IOpticalCharacterRecognitionProcessor, verifier: IDocumentVerifier) =>
-        new AnalyzeKeywordsService(storage, ocr, verifier),
-    inject: ['IStorage', 'IOpticalCharacterRecognitionProcessor', 'IDocumentVerifier'],
-};
-
 export const reliabilityReportRepositoryProvider = {
     provide: 'IReliabilityReportRepository',
     useClass: ReliabilityReportRepository,
@@ -36,6 +29,13 @@ export const verifyDocumentUseCaseProvider = {
         documentRepository: IDocumentRepository,
     ) => new GetReliabilityReportUseCase(analyzeKeywordsProvider, reliabilityReportRepository, documentRepository),
     inject: ['IAnalyzeKeywords', 'IReliabilityReportRepository', 'IDocumentRepository'],
+};
+
+export const analyzeKeywordsServiceProvider = {
+    provide: 'IAnalyzeKeywords',
+    useFactory: (storage: IStorage, ocr: IOpticalCharacterRecognitionProcessor, verifier: IDocumentVerifier) =>
+        new AnalyzeKeywordsService(storage, ocr, verifier),
+    inject: ['IStorage', 'IOpticalCharacterRecognitionProcessor', 'IDocumentVerifier'],
 };
 
 export const verifyDocumentProvider = [
