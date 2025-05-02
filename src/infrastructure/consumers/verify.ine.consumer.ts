@@ -20,7 +20,7 @@ export class VerifyIneConsumer extends WorkerHost {
             const key: string = data.key;
             this.logger.log(`Processing document with key ${key}`);
             // @ts-ignore
-            await this.verifyDocumentUseCase.verify(data.documentId);
+            const res = await this.verifyDocumentUseCase.verify(data.documentId);
             this.logger.log(`Document with key ${key} finished processing successfully.`);
         } catch (e) {
             this.logger.error(`Error processing document with key ${job.data.key}`);

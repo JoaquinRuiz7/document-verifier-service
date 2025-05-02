@@ -3,7 +3,7 @@ import { IDocumentRepository } from '../../core/interfaces/repository/i.document
 import { LegalDocument } from '../../core/entities/legal.document';
 import { IJobService } from '../../core/interfaces/jobs/IJobService';
 
-export class EnqueueInesToVerifyUseCase implements IEnqueueInesToVerifyUseCase {
+export class EnqueueInesToVerifyUseCaseImpl implements IEnqueueInesToVerifyUseCase {
     constructor(
         private readonly documentsRepository: IDocumentRepository,
         private readonly jobService: IJobService,

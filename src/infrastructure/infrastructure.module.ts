@@ -7,7 +7,7 @@ import { BullModule } from '@nestjs/bullmq';
 import { Queue } from './enums/queue';
 import { analyzeKeywordsProvider } from './providers/services/analyze.keywords.service.provider';
 import { verifyDocumentProvider } from './providers/usecases/verify.document.usecase.provider';
-import { VerifyIneConsumer } from './consumers/verify.Ine.consumer';
+import { VerifyIneConsumer } from './consumers/verify.ine.consumer';
 
 @Module({
     imports: [PersistenceModule, DatabaseModule, BullModule.registerQueue({ name: Queue.PROCESS_INE })],

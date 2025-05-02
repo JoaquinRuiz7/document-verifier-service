@@ -1,6 +1,6 @@
 // src/infrastructure/providers/usecase.providers.ts
 
-import { VerifyIneDocumentUseCase } from '../../../application/usecases/verifyIneDocumentUseCase';
+import { VerifyIneDocumentUseCaseImpl } from '../../../application/usecases/verify.ine.document.use.case.impl';
 import { ReliabilityReportRepository } from '../../persistence/repository/reliability.report.repository';
 import { IReliabilityReportRepository } from '../../../core/interfaces/repository/i.reliability.report.repository';
 import { DocumentRepository } from '../../persistence/repository/document.repository';
@@ -29,7 +29,7 @@ export const verifyDocumentUseCaseProvider = {
         analyzeKeywordsProvider: IAnalyzeKeywords,
         reliabilityReportRepository: IReliabilityReportRepository,
         documentRepository: IDocumentRepository,
-    ) => new VerifyIneDocumentUseCase(analyzeKeywordsProvider, reliabilityReportRepository, documentRepository),
+    ) => new VerifyIneDocumentUseCaseImpl(analyzeKeywordsProvider, reliabilityReportRepository, documentRepository),
     inject: ['IAnalyzeKeywords', 'IReliabilityReportRepository', 'IDocumentRepository'],
 };
 
