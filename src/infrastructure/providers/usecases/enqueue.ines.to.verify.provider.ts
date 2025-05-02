@@ -3,7 +3,7 @@
 import { DocumentRepository } from '../../persistence/repository/document.repository';
 import { IDocumentRepository } from '../../../core/interfaces/repository/i.document.repository';
 import { IneJobService } from '../../jobs/ine.job.service';
-import { EnqueueInesToVerifyUseCase } from '../../../application/usecases/enqueue.ines.to.verify';
+import { EnqueueInesToVerifyUseCaseImpl } from '../../../application/usecases/enqueue.ines.to.verify';
 
 export const documentRepositoryProvider = {
     provide: 'IDocumentRepository',
@@ -18,7 +18,7 @@ export const jobsProvider = {
 export const enqueueInesToVerifyUseCase = {
     provide: 'IEnqueueInesToVerifyUseCase',
     useFactory: (documentsRepository: IDocumentRepository, jobService: IneJobService) =>
-        new EnqueueInesToVerifyUseCase(documentsRepository, jobService),
+        new EnqueueInesToVerifyUseCaseImpl(documentsRepository, jobService),
     inject: ['IDocumentRepository', 'IJobService'],
 };
 

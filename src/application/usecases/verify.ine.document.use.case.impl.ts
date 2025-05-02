@@ -6,7 +6,7 @@ import { LegalDocument } from '../../core/entities/legal.document';
 import { IAnalyzeKeywords } from '../interfaces/i.analyze.keywords';
 import { IDocumentRepository } from '../../core/interfaces/repository/i.document.repository';
 
-export class VerifyIneDocumentUseCase implements IVerifyDocumentUseCase {
+export class VerifyIneDocumentUseCaseImpl implements IVerifyDocumentUseCase {
     constructor(
         private readonly analyzeKeywordsService: IAnalyzeKeywords,
         private readonly reliabilityReportRepository: IReliabilityReportRepository,
