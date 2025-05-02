@@ -6,6 +6,7 @@ import { LegalDocument as LegalDocumentEntity } from '../model/legal.document.en
 import { LegalDocument } from '../../../core/entities/legal.document';
 import { LegalDocumentMapper } from '../mapper/legal.document.mapper';
 import { DocumentNotFoundException } from '../../../core/exceptions/document.not.found.exception';
+import { DocumentType } from '../../../core/enums/document.type';
 
 @Injectable()
 export class DocumentRepository implements IDocumentRepository {
@@ -13,6 +14,19 @@ export class DocumentRepository implements IDocumentRepository {
         @Inject(DatabaseConstants.USERS_LEGAL_DOCUMENTS_REPOSITORY)
         private readonly documentRepository: Repository<LegalDocumentEntity>,
     ) {}
+
+    async getDocumentsToProcess(): Promise<LegalDocument[]> {
+        const documents: LegalDocumentEntity[] = await this.documentRepository.find({
+            where: {
+                // @ts-ignore
+                _documentType: DocumentType.INE_IMAGE,
+                _verified: false,
+            },
+            take: 200,
+        });
+
+        return documents.map((d: LegalDocumentEntity) => LegalDocumentMapper.toDomain(d));
+    }
 
     async save(legalDocument: LegalDocument) {
         await this.documentRepository.save(LegalDocumentMapper.toEntity(legalDocument));

@@ -2,8 +2,7 @@ export class IneReliabilityReport {
     private _id: number;
     private _documentId: number;
     private _reliabilityPercentage: number;
-    private _verified: boolean;
-    private _validUntil:number;
+    private _validUntil: number;
     private _createdAt: Date;
     private _updatedAt: Date;
 
@@ -31,14 +30,6 @@ export class IneReliabilityReport {
         this._reliabilityPercentage = value;
     }
 
-    get verified(): boolean {
-        return this._verified;
-    }
-
-    set verified(value: boolean) {
-        this._verified = value;
-    }
-
     get createdAt(): Date {
         return this._createdAt;
     }
@@ -54,7 +45,6 @@ export class IneReliabilityReport {
     set updatedAt(value: Date) {
         this._updatedAt = value;
     }
-
 
     get validUntil(): number {
         return this._validUntil;

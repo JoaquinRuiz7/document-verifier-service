@@ -8,7 +8,6 @@ export class ReliabilityReportMapper {
         report.id = entity.id;
         report.documentId = entity.documentId;
         report.reliabilityPercentage = entity.reliabilityPercentage;
-        report.verified = entity.verified;
         report.createdAt = entity.createdAt;
         report.updatedAt = entity.updatedAt;
 
@@ -21,7 +20,6 @@ export class ReliabilityReportMapper {
         entity.id = domain.id;
         entity.documentId = domain.documentId;
         entity.reliabilityPercentage = domain.reliabilityPercentage;
-        entity.verified = domain.verified;
         entity.validUntil = domain.validUntil;
         entity.createdAt = domain.createdAt;
         entity.updatedAt = domain.updatedAt;

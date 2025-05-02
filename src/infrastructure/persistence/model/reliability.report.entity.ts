@@ -8,8 +8,6 @@ export class ReliabilityReportEntity {
 
     @Column({ name: 'reliability_percentage' }) private _reliabilityPercentage: number;
 
-    @Column({ name: 'verified' }) private _verified: boolean;
-
     @Column({ name: 'valid_until' }) private _validUntil: number;
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' }) private _createdAt: Date;
@@ -40,14 +38,6 @@ export class ReliabilityReportEntity {
         this._reliabilityPercentage = value;
     }
 
-    get verified(): boolean {
-        return this._verified;
-    }
-
-    set verified(value: boolean) {
-        this._verified = value;
-    }
-
     get createdAt(): Date {
         return this._createdAt;
     }
@@ -63,7 +53,6 @@ export class ReliabilityReportEntity {
     set updatedAt(value: Date) {
         this._updatedAt = value;
     }
-
 
     get validUntil(): number {
         return this._validUntil;

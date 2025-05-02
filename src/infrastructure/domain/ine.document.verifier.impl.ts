@@ -8,8 +8,8 @@ export class IneDocumentVerifierImpl implements IDocumentVerifier {
         const found = keywords.filter((kw) => lowerWords.includes(kw.toLowerCase()));
         const missing = keywords.filter((kw) => !lowerWords.includes(kw.toLowerCase()));
         const percentage = Math.ceil((found.length / keywords.length) * 100);
-        const {lastValidYear} = this.getYears(words);
-        return { found, missing, percentage,lastvalidYear:Number(lastValidYear) };
+        const { lastValidYear } = this.getYears(words);
+        return { found, missing, percentage, lastvalidYear: Number(lastValidYear) };
     }
 
     isExpired(words: string[]): boolean {
