@@ -5,7 +5,7 @@ import { InfrastructureModule } from './infrastructure/infrastructure.module';
 import { ApplicationModule } from './application/application.module';
 import { DatabaseModule } from './infrastructure/config/database/database.module';
 import { ConfigModule } from '@nestjs/config';
-import { GetReliabilityReportUseCase } from './application/usecases/get.reliability.report.use.case';
+import { VerifyIneDocumentUseCase } from './application/usecases/verifyIneDocumentUseCase';
 import { BullModule } from '@nestjs/bullmq';
 import { JobsModule } from './infrastructure/jobs/jobs.module';
 import { ScheduleModule } from '@nestjs/schedule';
@@ -28,6 +28,6 @@ import { ScheduleModule } from '@nestjs/schedule';
         JobsModule,
     ],
     controllers: [AppController],
-    providers: [AppService, GetReliabilityReportUseCase],
+    providers: [AppService, VerifyIneDocumentUseCase],
 })
 export class AppModule {}
