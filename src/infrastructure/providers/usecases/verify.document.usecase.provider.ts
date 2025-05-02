@@ -1,6 +1,6 @@
 // src/infrastructure/providers/usecase.providers.ts
 
-import { GetReliabilityReportUseCase } from '../../../application/usecases/get.reliability.report.use.case';
+import { VerifyIneDocumentUseCase } from '../../../application/usecases/verifyIneDocumentUseCase';
 import { ReliabilityReportRepository } from '../../persistence/repository/reliability.report.repository';
 import { IReliabilityReportRepository } from '../../../core/interfaces/repository/i.reliability.report.repository';
 import { DocumentRepository } from '../../persistence/repository/document.repository';
@@ -8,7 +8,9 @@ import { IDocumentRepository } from '../../../core/interfaces/repository/i.docum
 import { IAnalyzeKeywords } from '../../../application/interfaces/i.analyze.keywords';
 import { AnalyzeKeywordsService } from '../../../application/services/analyze.keywords.service';
 import { IStorage } from '../../../core/interfaces/storage/i.storage';
-import { IOpticalCharacterRecognitionProcessor } from '../../../core/interfaces/domain/i.optical.character.recognition.processor';
+import {
+    IOpticalCharacterRecognitionProcessor,
+} from '../../../core/interfaces/domain/i.optical.character.recognition.processor';
 import { IDocumentVerifier } from '../../../core/interfaces/domain/i.document.verifier';
 
 export const reliabilityReportRepositoryProvider = {
@@ -22,12 +24,12 @@ export const documentRepositoryProvider = {
 };
 
 export const verifyDocumentUseCaseProvider = {
-    provide: 'IGetReliabilityReportUseCase',
+    provide: 'IVerifyDocumentUseCase',
     useFactory: (
         analyzeKeywordsProvider: IAnalyzeKeywords,
         reliabilityReportRepository: IReliabilityReportRepository,
         documentRepository: IDocumentRepository,
-    ) => new GetReliabilityReportUseCase(analyzeKeywordsProvider, reliabilityReportRepository, documentRepository),
+    ) => new VerifyIneDocumentUseCase(analyzeKeywordsProvider, reliabilityReportRepository, documentRepository),
     inject: ['IAnalyzeKeywords', 'IReliabilityReportRepository', 'IDocumentRepository'],
 };
 
