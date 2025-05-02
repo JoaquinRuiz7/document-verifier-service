@@ -10,6 +10,7 @@ export class LegalDocumentMapper {
         entity.documentType = legalDocument.documentType;
         entity.verified = legalDocument.verified;
         entity.validUntil = legalDocument.validUntil;
+        entity.isExpired = legalDocument.isExpired;
         entity.createdAt = legalDocument.createdAt;
         entity.updatedAt = new Date();
         return entity;
@@ -24,6 +25,7 @@ export class LegalDocumentMapper {
         domain.verified = entity.verified;
         domain.validUntil = entity.validUntil;
         domain.createdAt = entity.createdAt;
+        domain.isExpired = entity.isExpired;
         domain.updatedAt = entity.updatedAt;
         return domain;
     }

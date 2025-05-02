@@ -13,9 +13,7 @@ export class VerifyIneDocumentUseCaseImpl implements IVerifyDocumentUseCase {
         private readonly documentRepository: IDocumentRepository,
     ) {}
 
-    public async verify(
-        documentId: number,
-    ): Promise<{ reliabilityPercentage: number; isExpired: boolean }> {
+    public async verify(documentId: number): Promise<{ reliabilityPercentage: number; isExpired: boolean }> {
         const document: LegalDocument = await this.documentRepository.getById(documentId);
         const analyzeKeywordsResponse: AnalyzeKeywordsResponse = await this.analyzeKeywordsService.analyze(
             document.key,
@@ -31,9 +29,9 @@ export class VerifyIneDocumentUseCaseImpl implements IVerifyDocumentUseCase {
 
         document.verified = percentage >= 90;
         document.validUntil = analyzeKeywordsResponse.lastValidYear;
+        document.isExpired = analyzeKeywordsResponse.isExpired;
 
         await this.documentRepository.save(document);
-
         return { reliabilityPercentage: analyzeKeywordsResponse.percentage, isExpired: isExpired };
     }
 }

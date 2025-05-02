@@ -1,7 +1,5 @@
 import { createWorker } from 'tesseract.js';
-import {
-    IOpticalCharacterRecognitionProcessor,
-} from '../../core/interfaces/domain/i.optical.character.recognition.processor';
+import { IOpticalCharacterRecognitionProcessor } from '../../core/interfaces/domain/i.optical.character.recognition.processor';
 import { Injectable } from '@nestjs/common';
 import * as sharp from 'sharp';
 
