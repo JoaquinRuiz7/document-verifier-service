@@ -5,7 +5,7 @@ import { Inject, Injectable } from '@nestjs/common';
 @Injectable()
 export class IneVerifyScheduler {
     constructor(
-        @Inject('EnqueueInesToVerifyUseCase')
+        @Inject('IEnqueueInesToVerifyUseCase')
         private readonly enqueueInesToVerifyUseCase: IEnqueueInesToVerifyUseCase,
     ) {}
 

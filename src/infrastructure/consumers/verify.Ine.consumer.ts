@@ -8,18 +8,23 @@ import { IGetReliabilityReportUseCase } from '../../application/interfaces/i.get
 export class VerifyIneConsumer extends WorkerHost {
     private readonly logger: Logger = new Logger('VerifyIneConsumer');
     constructor(
-        @Inject('GetReliabilityReportUsecase')
+        @Inject('IGetReliabilityReportUseCase')
         private readonly getReliabilityReportUseCase: IGetReliabilityReportUseCase,
     ) {
         super();
     }
 
     async process(job: Job<any, any, string>): Promise<any> {
-        const { data } = job;
-        const key: string = data.key;
-        this.logger.log(`Processing document with key ${key}`);
-        // @ts-ignore
-        await this.getReliabilityReportUseCase.getReliabilityReport(key, data.documentId);
-        this.logger.log(`Document with key ${key} finished processing successfully}`);
+        try {
+            const { data } = job;
+            const key: string = data.key;
+            this.logger.log(`Processing document with key ${key}`);
+            // @ts-ignore
+            await this.getReliabilityReportUseCase.getReliabilityReport(data.documentId);
+            this.logger.log(`Document with key ${key} finished processing successfully.`);
+        } catch (e) {
+            this.logger.error(`Error processing document with key ${job.data.key}`);
+            this.logger.error(e);
+        }
     }
 }

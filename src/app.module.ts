@@ -9,7 +9,6 @@ import { GetReliabilityReportUseCase } from './application/usecases/get.reliabil
 import { BullModule } from '@nestjs/bullmq';
 import { JobsModule } from './infrastructure/jobs/jobs.module';
 import { ScheduleModule } from '@nestjs/schedule';
-import { ConsumersModule } from './infrastructure/consumers/consumers.module';
 
 @Module({
     imports: [
@@ -27,7 +26,6 @@ import { ConsumersModule } from './infrastructure/consumers/consumers.module';
             },
         }),
         JobsModule,
-        ConsumersModule,
     ],
     controllers: [AppController],
     providers: [AppService, GetReliabilityReportUseCase],
