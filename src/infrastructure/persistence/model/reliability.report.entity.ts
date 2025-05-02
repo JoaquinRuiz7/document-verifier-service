@@ -10,6 +10,8 @@ export class ReliabilityReportEntity {
 
     @Column({ name: 'verified' }) private _verified: boolean;
 
+    @Column({ name: 'valid_until' }) private _validUntil: number;
+
     @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' }) private _createdAt: Date;
 
     @UpdateDateColumn({ name: 'updated_at', type: 'timestamp with time zone' }) private _updatedAt: Date;
@@ -60,5 +62,14 @@ export class ReliabilityReportEntity {
 
     set updatedAt(value: Date) {
         this._updatedAt = value;
+    }
+
+
+    get validUntil(): number {
+        return this._validUntil;
+    }
+
+    set validUntil(value: number) {
+        this._validUntil = value;
     }
 }

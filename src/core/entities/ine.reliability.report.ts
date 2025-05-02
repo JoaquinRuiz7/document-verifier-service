@@ -3,6 +3,7 @@ export class IneReliabilityReport {
     private _documentId: number;
     private _reliabilityPercentage: number;
     private _verified: boolean;
+    private _validUntil:number;
     private _createdAt: Date;
     private _updatedAt: Date;
 
@@ -52,5 +53,14 @@ export class IneReliabilityReport {
 
     set updatedAt(value: Date) {
         this._updatedAt = value;
+    }
+
+
+    get validUntil(): number {
+        return this._validUntil;
+    }
+
+    set validUntil(value: number) {
+        this._validUntil = value;
     }
 }

@@ -62,6 +62,7 @@ export class GetReliabilityReportUseCase implements IGetReliabilityReportUseCase
         reliabilityReport.documentId = document.id;
         reliabilityReport.reliabilityPercentage = percentage;
         reliabilityReport.verified = percentage > 90;
+        reliabilityReport.validUntil = analyzeKeywordsResponse.lastvalidYear;
         this.reliabilityReportRepository.save(reliabilityReport);
 
         return { reliabilityPercentage: analyzeKeywordsResponse.percentage, isExpired: isExpired };

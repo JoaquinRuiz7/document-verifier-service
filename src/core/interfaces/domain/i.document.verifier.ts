@@ -2,6 +2,7 @@ export type AnalyzeKeywordsResponse = {
     found: string[];
     missing: string[];
     percentage: number;
+    lastvalidYear: number;
 };
 
 export interface IDocumentVerifier {

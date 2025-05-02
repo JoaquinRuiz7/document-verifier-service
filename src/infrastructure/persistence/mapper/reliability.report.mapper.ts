@@ -22,6 +22,7 @@ export class ReliabilityReportMapper {
         entity.documentId = domain.documentId;
         entity.reliabilityPercentage = domain.reliabilityPercentage;
         entity.verified = domain.verified;
+        entity.validUntil = domain.validUntil;
         entity.createdAt = domain.createdAt;
         entity.updatedAt = domain.updatedAt;
 
