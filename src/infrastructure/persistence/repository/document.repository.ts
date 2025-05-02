@@ -28,7 +28,7 @@ export class DocumentRepository implements IDocumentRepository {
         return documents.map((d: LegalDocumentEntity) => LegalDocumentMapper.toDomain(d));
     }
 
-    async save(legalDocument: LegalDocument) {
+    async save(legalDocument: LegalDocument): Promise<void> {
         await this.documentRepository.save(LegalDocumentMapper.toEntity(legalDocument));
     }
 

@@ -6,7 +6,7 @@ import { IneJobService } from '../../jobs/ine.job.service';
 import { EnqueueInesToVerifyUseCase } from '../../../application/usecases/enqueue.ines.to.verify';
 
 export const documentRepositoryProvider = {
-    provide: 'DocumentRepository',
+    provide: 'IDocumentRepository',
     useClass: DocumentRepository,
 };
 
@@ -16,10 +16,10 @@ export const jobsProvider = {
 };
 
 export const enqueueInesToVerifyUseCase = {
-    provide: 'EnqueueInesToVerifyUseCase',
-    useFactory: (documentRepo: IDocumentRepository, jobService: IneJobService) =>
-        new EnqueueInesToVerifyUseCase(documentRepo, jobService),
-    inject: ['DocumentRepository', 'IJobService'],
+    provide: 'IEnqueueInesToVerifyUseCase',
+    useFactory: (documentsRepository: IDocumentRepository, jobService: IneJobService) =>
+        new EnqueueInesToVerifyUseCase(documentsRepository, jobService),
+    inject: ['IDocumentRepository', 'IJobService'],
 };
 
 export const enqueueInesToVerifyProvider = [documentRepositoryProvider, jobsProvider, enqueueInesToVerifyUseCase];

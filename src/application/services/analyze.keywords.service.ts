@@ -1,7 +1,7 @@
 import { IStorage } from '../../core/interfaces/storage/i.storage';
 import { IOpticalCharacterRecognitionProcessor } from '../../core/interfaces/domain/i.optical.character.recognition.processor';
 import { AnalyzeKeywordsResponse, IDocumentVerifier } from '../../core/interfaces/domain/i.document.verifier';
-import { IAnalyzeKeywords } from '../interfaces/IAnalyzeKeywords';
+import { IAnalyzeKeywords } from '../interfaces/i.analyze.keywords';
 
 export class AnalyzeKeywordsService implements IAnalyzeKeywords {
     constructor(
@@ -11,8 +11,8 @@ export class AnalyzeKeywordsService implements IAnalyzeKeywords {
     ) {}
 
     public async analyze(documentKey: string): Promise<AnalyzeKeywordsResponse> {
-        const buffer = await this.storage.getObject(documentKey);
-        const words = await this.ocr.readImageAndExtractText(buffer);
+        const buffer: Buffer = await this.storage.getObject(documentKey);
+        const words: string[] = await this.ocr.readImageAndExtractText(buffer);
         if (words.length === 0)
             return {
                 isExpired: false,

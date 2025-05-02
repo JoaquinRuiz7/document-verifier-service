@@ -3,10 +3,7 @@
 import { S3Storage } from '../../storage/s3.storage';
 import { TesseractIOpticalCharacterRecognition } from '../../domain/tesseract.optical.character.recognition';
 import { IneDocumentVerifierImpl } from '../../domain/ine.document.verifier.impl';
-import { IStorage } from '../../../core/interfaces/storage/i.storage';
-import { IOpticalCharacterRecognitionProcessor } from '../../../core/interfaces/domain/i.optical.character.recognition.processor';
-import { IDocumentVerifier } from '../../../core/interfaces/domain/i.document.verifier';
-import { AnalyzeKeywordsService } from '../../../application/services/analyze.keywords.service';
+import { S3Provider } from '../../storage/s3.provider';
 
 export const storageProvider = {
     provide: 'IStorage',
@@ -23,11 +20,4 @@ export const documentVerifier = {
     useClass: IneDocumentVerifierImpl,
 };
 
-export const analyzeKeywordsServiceProvider = {
-    provide: 'AnalyzeKeywordsService',
-    useFactory: (storage: IStorage, ocr: IOpticalCharacterRecognitionProcessor, verifier: IDocumentVerifier) =>
-        new AnalyzeKeywordsService(storage, ocr, verifier),
-    inject: ['IStorage', 'IOpticalCharacterRecognitionProcessor', 'IDocumentVerifier'],
-};
-
-export const analyzeKeywordsProvider = [storageProvider, ocrProvider, documentVerifier, analyzeKeywordsServiceProvider];
+export const analyzeKeywordsProvider = [S3Provider, storageProvider, ocrProvider, documentVerifier];

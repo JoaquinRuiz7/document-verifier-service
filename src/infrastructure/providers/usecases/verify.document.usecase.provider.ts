@@ -5,13 +5,19 @@ import { ReliabilityReportRepository } from '../../persistence/repository/reliab
 import { IReliabilityReportRepository } from '../../../core/interfaces/repository/i.reliability.report.repository';
 import { DocumentRepository } from '../../persistence/repository/document.repository';
 import { IDocumentRepository } from '../../../core/interfaces/repository/i.document.repository';
-import { IAnalyzeKeywords } from '../../../application/interfaces/IAnalyzeKeywords';
+import { IAnalyzeKeywords } from '../../../application/interfaces/i.analyze.keywords';
 import { AnalyzeKeywordsService } from '../../../application/services/analyze.keywords.service';
+import { IStorage } from '../../../core/interfaces/storage/i.storage';
+import { IOpticalCharacterRecognitionProcessor } from '../../../core/interfaces/domain/i.optical.character.recognition.processor';
+import { IDocumentVerifier } from '../../../core/interfaces/domain/i.document.verifier';
 
-export const analyzeKeyWordsServiceProvider = {
+export const analyzeKeywordsServiceProvider = {
     provide: 'IAnalyzeKeywords',
-    useClass: AnalyzeKeywordsService,
+    useFactory: (storage: IStorage, ocr: IOpticalCharacterRecognitionProcessor, verifier: IDocumentVerifier) =>
+        new AnalyzeKeywordsService(storage, ocr, verifier),
+    inject: ['IStorage', 'IOpticalCharacterRecognitionProcessor', 'IDocumentVerifier'],
 };
+
 export const reliabilityReportRepositoryProvider = {
     provide: 'IReliabilityReportRepository',
     useClass: ReliabilityReportRepository,
@@ -23,7 +29,7 @@ export const documentRepositoryProvider = {
 };
 
 export const verifyDocumentUseCaseProvider = {
-    provide: 'GetReliabilityReportUsecase',
+    provide: 'IGetReliabilityReportUseCase',
     useFactory: (
         analyzeKeywordsProvider: IAnalyzeKeywords,
         reliabilityReportRepository: IReliabilityReportRepository,
@@ -33,7 +39,7 @@ export const verifyDocumentUseCaseProvider = {
 };
 
 export const verifyDocumentProvider = [
-    analyzeKeyWordsServiceProvider,
+    analyzeKeywordsServiceProvider,
     reliabilityReportRepositoryProvider,
     documentRepositoryProvider,
     verifyDocumentUseCaseProvider,
