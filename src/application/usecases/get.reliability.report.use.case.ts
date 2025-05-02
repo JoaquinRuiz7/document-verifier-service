@@ -1,4 +1,6 @@
-import { IOpticalCharacterRecognitionProcessor } from '../../core/interfaces/domain/i.optical.character.recognition.processor';
+import {
+    IOpticalCharacterRecognitionProcessor,
+} from '../../core/interfaces/domain/i.optical.character.recognition.processor';
 import { IGetReliabilityReportUseCase } from '../interfaces/i.get.reliability.report.use.case';
 import { AnalyzeKeywordsResponse, IDocumentVerifier } from '../../core/interfaces/domain/i.document.verifier';
 import { IReliabilityReportRepository } from '../../core/interfaces/repository/i.reliability.report.repository';
@@ -62,7 +64,6 @@ export class GetReliabilityReportUseCase implements IGetReliabilityReportUseCase
         const percentage: number = analyzeKeywordsResponse.percentage;
         reliabilityReport.documentId = documentId;
         reliabilityReport.reliabilityPercentage = percentage;
-        reliabilityReport.validUntil = analyzeKeywordsResponse.lastvalidYear;
 
         this.reliabilityReportRepository.save(reliabilityReport);
 
