@@ -26,7 +26,7 @@ export class GetReliabilityReportUseCase implements IGetReliabilityReportUseCase
         'municipio',
         'sección',
         'localidad',
-        'vigencia',
+        'vicencia',
         'emisión',
     ];
 
@@ -49,6 +49,7 @@ export class GetReliabilityReportUseCase implements IGetReliabilityReportUseCase
             this.KEY_WORDS,
             words,
         );
+
         const isExpired: boolean = this.documentVerifier.isExpired(words);
         return { reliabilityPercentage: analyzeKeywordsResponse.percentage, isExpired: isExpired };
     }
