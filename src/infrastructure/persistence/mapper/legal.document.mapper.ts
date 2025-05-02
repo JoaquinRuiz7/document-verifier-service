@@ -8,6 +8,8 @@ export class LegalDocumentMapper {
         entity.userId = legalDocument.userId;
         entity.documentKey = legalDocument.key;
         entity.documentType = legalDocument.documentType;
+        entity.verified = legalDocument.verified;
+        entity.validUntil = legalDocument.validUntil;
         entity.createdAt = legalDocument.createdAt;
         entity.updatedAt = new Date();
         return entity;
@@ -19,6 +21,8 @@ export class LegalDocumentMapper {
         domain.userId = entity.userId;
         domain.key = entity.documentKey;
         domain.documentType = entity.documentType;
+        domain.verified = entity.verified;
+        domain.validUntil = entity.validUntil;
         domain.createdAt = entity.createdAt;
         domain.updatedAt = entity.updatedAt;
         return domain;

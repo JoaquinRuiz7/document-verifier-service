@@ -1,8 +1,8 @@
 import { Module } from '@nestjs/common';
-import { databaseProviders, legalDocumentsProvider } from './dabatase.config';
+import { databaseProviders, ineReliabilityReportProvider, legalDocumentsProvider } from './dabatase.config';
 
 @Module({
-    providers: [...databaseProviders, ...legalDocumentsProvider],
-    exports: [...databaseProviders, ...legalDocumentsProvider],
+    providers: [...databaseProviders, ...legalDocumentsProvider, ...ineReliabilityReportProvider],
+    exports: [...databaseProviders, ...legalDocumentsProvider, ...ineReliabilityReportProvider],
 })
 export class DatabaseModule {}

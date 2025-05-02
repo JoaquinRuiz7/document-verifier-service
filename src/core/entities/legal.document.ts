@@ -5,6 +5,8 @@ export class LegalDocument {
     private _userId: number;
     private _documentType: DocumentType;
     private _key: string;
+    private _validUntil: number;
+    private _verified: boolean;
     private _createdAt: Date;
     private _updatedAt: Date;
 
@@ -54,5 +56,21 @@ export class LegalDocument {
 
     set updatedAt(value: Date) {
         this._updatedAt = value;
+    }
+
+    get validUntil(): number {
+        return this._validUntil;
+    }
+
+    set validUntil(value: number) {
+        this._validUntil = value;
+    }
+
+    get verified(): boolean {
+        return this._verified;
+    }
+
+    set verified(value: boolean) {
+        this._verified = value;
     }
 }

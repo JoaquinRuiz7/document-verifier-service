@@ -1,5 +1,6 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { DocumentType } from '../../../core/enums/document.type';
+import postgres from 'postgres';
 
 @Entity({ name: 'user_legal_documents' })
 export class LegalDocument {
@@ -11,8 +12,12 @@ export class LegalDocument {
     private _documentType: DocumentType;
     @Column({ name: 'document_key' })
     private _documentKey: string;
-    @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' }) private _createdAt: Date;
+    @Column({ name: 'verified' })
+    private _verified: boolean;
+    @Column({ name: 'valid_until' })
+    private _validUntil: number;
 
+    @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' }) private _createdAt: Date;
     @UpdateDateColumn({ name: 'updated_at', type: 'timestamp with time zone' }) private _updatedAt: Date;
 
     get id(): number {
@@ -61,5 +66,21 @@ export class LegalDocument {
 
     set updatedAt(value: Date) {
         this._updatedAt = value;
+    }
+
+    set verified(value: boolean) {
+        this._verified = value;
+    }
+
+    get verified(): boolean {
+        return this._verified;
+    }
+
+    get validUntil(): number {
+        return this._validUntil;
+    }
+
+    set validUntil(value: number) {
+        this._validUntil = value;
     }
 }
