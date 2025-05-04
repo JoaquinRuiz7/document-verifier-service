@@ -5,5 +5,4 @@ export class AnalyzeDocumentUseCaseImpl implements IAnalyzeDocumentUseCase {
     analyze(): Promise<void> {
         throw new Error('Method not implemented.');
     }
-
 }
