@@ -1,12 +1,7 @@
-export type AnalyzeKeywordsResponse = {
-    found: string[];
-    missing: string[];
-    percentage: number;
-    lastValidYear: number;
-    isExpired: boolean;
+export type ConfidenceScore = {
+    confidence: number;
 };
 
 export interface IDocumentVerifier {
-    analyzeKeywords(words: string[]): AnalyzeKeywordsResponse;
-    isExpired(words: string[]): boolean;
+    verify(document: Buffer): ConfidenceScore;
 }

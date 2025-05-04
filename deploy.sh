@@ -72,8 +72,6 @@ fi
 
 # STOPING SERVICES
 echo "🛑 Stopping any existing services to avoid port conflicts..."
-sudo systemctl stop nginx || true
-sudo systemctl stop apache2 || true
 sudo fuser -k 80/tcp || true
 sudo fuser -k 443/tcp || true
 sudo systemctl stop redis || true
