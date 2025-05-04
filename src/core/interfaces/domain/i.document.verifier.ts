@@ -3,5 +3,5 @@ export type ConfidenceScore = {
 };
 
 export interface IDocumentVerifier {
-    verify(document: Buffer): ConfidenceScore;
+    verify(document: Buffer): Promise<ConfidenceScore>;
 }

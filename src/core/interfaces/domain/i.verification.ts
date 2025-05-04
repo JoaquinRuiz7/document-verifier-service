@@ -1,3 +1,3 @@
 export interface IVerification {
-    verify(document: Buffer): Promise<boolean>;
+    verify(extractedWords: string[]): boolean;
 }
