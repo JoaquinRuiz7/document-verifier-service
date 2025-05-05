@@ -89,6 +89,7 @@ export class IneDocumentVerifierImpl implements IDocumentVerifier {
 
     private formatToCurpDate(input: string | number): string {
         const str = input.toString();
+        console.log({input});
         if (str.length !== 8) {
             throw new Error('Input must be 8 digits in DDMMYYYY format');
         }
