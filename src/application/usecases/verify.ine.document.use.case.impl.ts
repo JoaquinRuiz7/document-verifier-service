@@ -26,12 +26,13 @@ export class VerifyIneDocumentUseCaseImpl implements IVerifyDocumentUseCase {
         const reliabilityReport: IneReliabilityReport = foundReliabilityReport
             ? foundReliabilityReport
             : new IneReliabilityReport();
+
         const percentage: number = analyzeKeywordsResponse.percentage;
         reliabilityReport.documentId = documentId;
         reliabilityReport.reliabilityPercentage = percentage;
-        reliabilityReport.attempts = (reliabilityReport.attempts || 0) + 1;
+        reliabilityReport.attempts++;
 
-        this.reliabilityReportRepository.save(reliabilityReport);
+        await this.reliabilityReportRepository.save(reliabilityReport);
 
         document.verified = percentage >= 90;
         document.validUntil = analyzeKeywordsResponse.lastValidYear;

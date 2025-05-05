@@ -45,9 +45,6 @@ export class DocumentRepository implements IDocumentRepository {
           .select(['uld'])
           .take(200);
 
-        console.log(query.getQuery());
-        return [];
-
         return documents.map((entity: LegalDocumentEntity) => LegalDocumentMapper.toDomain(entity));
     }
 
