@@ -6,6 +6,13 @@ export class IneReliabilityReport {
     private _createdAt: Date;
     private _updatedAt: Date;
 
+    constructor() {
+        this._id = 0;
+        this._documentId = 0;
+        this._reliabilityPercentage = 0;
+        this._attempts = 0;
+    }
+
     get id(): number {
         return this._id;
     }
