@@ -25,7 +25,7 @@ export class DocumentRepository implements IDocumentRepository {
             .andWhere('irr.attempts < :maxAttempts', { maxAttempts: 3 })
             .take(200)
             .getRawMany();
-        console.log({ documents });
+
         return documents.map((d: LegalDocumentEntity) => LegalDocumentMapper.toDomain(d));
     }
 

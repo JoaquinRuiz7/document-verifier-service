@@ -11,6 +11,7 @@ export class EnqueueInesToVerifyUseCaseImpl implements IEnqueueInesToVerifyUseCa
 
     async enqueue(): Promise<void> {
         const inesToProcess: LegalDocument[] = await this.documentsRepository.getDocumentsToProcess();
+        console.log({inesToProcess});
         inesToProcess.forEach((ine: LegalDocument) => this.jobService.enqueue({ key: ine.key, documentId: ine.id }));
     }
 }
