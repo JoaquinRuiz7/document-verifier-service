@@ -29,7 +29,9 @@ export class DocumentRepository implements IDocumentRepository {
                   .orWhere('irr.attempts is null')
             }))
             .take(1)
-            .getMany();
+            .getRawMany();
+
+        console.log({raw: documents});
 
         return documents.map((entity: LegalDocumentEntity) => LegalDocumentMapper.toDomain(entity));
     }
