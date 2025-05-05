@@ -2,6 +2,7 @@ export class IneReliabilityReport {
     private _id: number;
     private _documentId: number;
     private _reliabilityPercentage: number;
+    private _attempts: number;
     private _createdAt: Date;
     private _updatedAt: Date;
 
@@ -43,5 +44,13 @@ export class IneReliabilityReport {
 
     set updatedAt(value: Date) {
         this._updatedAt = value;
+    }
+
+    get attempts(): number {
+        return this._attempts;
+    }
+
+    set attempts(value: number) {
+        this._attempts = value;
     }
 }
