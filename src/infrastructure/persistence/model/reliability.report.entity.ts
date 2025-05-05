@@ -11,8 +11,8 @@ export class ReliabilityReportEntity {
     @Column({ name: 'reliability_percentage' })
     private _reliabilityPercentage: number;
 
-    @Column({name:'attempts'})
-    private _attempts:number;
+    @Column({ name: 'attempts' })
+    private _attempts: number;
 
     @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
     private _createdAt: Date;
