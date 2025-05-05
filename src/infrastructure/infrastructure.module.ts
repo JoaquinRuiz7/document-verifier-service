@@ -10,7 +10,9 @@ import { verifyDocumentProvider } from './providers/usecases/verify.document.use
 import { VerifyIneConsumer } from './consumers/verify.ine.consumer';
 
 @Module({
-    imports: [PersistenceModule, DatabaseModule, BullModule.registerQueue({ name: Queue.PROCESS_INE })],
+    imports: [PersistenceModule, DatabaseModule, BullModule.registerQueue({
+        name: Queue.PROCESS_INE,
+    })],
     exports: [...enqueueInesToVerifyProvider, ...analyzeKeywordsProvider, ...verifyDocumentProvider],
     providers: [
         ...enqueueInesToVerifyProvider,

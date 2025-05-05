@@ -82,6 +82,7 @@ export class IneDocumentVerifierImpl implements IDocumentVerifier {
         if (birthIndex === -1 || birthIndex + 1 >= words.length) return false;
 
         const rawDate: string = words[birthIndex + 3];
+        console.log({ words,index:words.indexOf('nacimiento') });
         const curpDate: string = this.formatToCurpDate(rawDate);
 
         return curp.length === 18 && curp.slice(4, 10) === curpDate;
