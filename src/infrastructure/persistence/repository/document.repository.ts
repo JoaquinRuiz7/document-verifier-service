@@ -29,7 +29,7 @@ export class DocumentRepository implements IDocumentRepository {
                 }),
             )
             .select(['uld'])
-            .take(1)
+            .take(200)
             .getMany();
 
         return documents.map((entity: LegalDocumentEntity) => LegalDocumentMapper.toDomain(entity));
