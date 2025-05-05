@@ -29,7 +29,7 @@ export class VerifyIneDocumentUseCaseImpl implements IVerifyDocumentUseCase {
         const percentage: number = analyzeKeywordsResponse.percentage;
         reliabilityReport.documentId = documentId;
         reliabilityReport.reliabilityPercentage = percentage;
-        reliabilityReport.attempts = reliabilityReport.attempts++;
+        reliabilityReport.attempts = (reliabilityReport.attempts || 0) + 1;
 
         this.reliabilityReportRepository.save(reliabilityReport);
 
