@@ -28,7 +28,7 @@ export class DocumentRepository implements IDocumentRepository {
             .getRawMany();
 
         const ret = documents.map((d: LegalDocumentEntity) => LegalDocumentMapper.toDomain(d));
-
+        console.log({ret});
         return ret;
     }
 
