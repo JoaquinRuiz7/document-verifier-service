@@ -13,6 +13,21 @@ export class ReliabilityReportRepository implements IReliabilityReportRepository
         private readonly ineReliabilityReportRepository: Repository<ReliabilityReportEntity>,
     ) {}
 
+    async findByDocumentId(id: number): Promise<IneReliabilityReport | null> {
+        const reliabilityReport: ReliabilityReportEntity | null = await this.ineReliabilityReportRepository.findOne({
+            where: {
+                // @ts-ignore
+                _documentId: id,
+            },
+        });
+
+        if (!reliabilityReport) {
+            return null;
+        }
+
+        return ReliabilityReportMapper.toDomain(reliabilityReport);
+    }
+
     async save(reliabilityReport: IneReliabilityReport): Promise<void> {
         await this.ineReliabilityReportRepository.save(ReliabilityReportMapper.toEntity(reliabilityReport));
     }
