@@ -20,7 +20,12 @@ export class VerifyIneDocumentUseCaseImpl implements IVerifyDocumentUseCase {
         );
 
         const isExpired: boolean = analyzeKeywordsResponse.isExpired;
-        const reliabilityReport: IneReliabilityReport = new IneReliabilityReport();
+        let foundReliabilityReport: IneReliabilityReport | null =
+            await this.reliabilityReportRepository.findByDocumentId(document.id);
+
+        const reliabilityReport: IneReliabilityReport = foundReliabilityReport
+            ? foundReliabilityReport
+            : new IneReliabilityReport();
         const percentage: number = analyzeKeywordsResponse.percentage;
         reliabilityReport.documentId = documentId;
         reliabilityReport.reliabilityPercentage = percentage;
