@@ -17,6 +17,7 @@ export class LegalDocumentMapper {
     }
 
     public static toDomain(entity: LegalDocumentEntity): LegalDocument {
+        console.log({ entity });
         const domain = new LegalDocument();
         domain.id = entity.id;
         domain.userId = entity.userId;
