@@ -8,7 +8,7 @@ export class ReliabilityReportMapper {
         report.id = entity.id;
         report.documentId = entity.documentId;
         report.reliabilityPercentage = entity.reliabilityPercentage;
-        report.reliabilityPercentage = entity.attempts;
+        report.attempts = entity.attempts;
         report.createdAt = entity.createdAt;
         report.updatedAt = entity.updatedAt;
 
