@@ -18,6 +18,7 @@ export class DocumentRepository implements IDocumentRepository {
     async getDocumentsToProcess(): Promise<LegalDocument[]> {
         const documents: LegalDocumentEntity[] = await this.documentRepository
             .createQueryBuilder('uld')
+            .select('uld.*')
             .leftJoin('ine_reliability_report', 'irr', 'uld.id = irr.document_id')
             .where('uld.document_type = :type', { type: DocumentType.INE_IMAGE })
             .andWhere('uld.verified = false')
