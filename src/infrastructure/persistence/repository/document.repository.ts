@@ -24,12 +24,10 @@ export class DocumentRepository implements IDocumentRepository {
             .andWhere('uld.verified = false')
             .andWhere('uld.is_expired = false')
             .andWhere('irr.attempts < :maxAttempts', { maxAttempts: 3 })
-            .take(2)
+            .take(1)
             .getRawMany();
 
-        const ret = documents.map((d: LegalDocumentEntity) => LegalDocumentMapper.toDomain(d));
-        console.log({ret});
-        return ret;
+        return documents.map((d: LegalDocumentEntity) => LegalDocumentMapper.toDomain(d));
     }
 
     async save(legalDocument: LegalDocument): Promise<void> {
