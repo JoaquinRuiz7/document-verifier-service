@@ -81,8 +81,7 @@ export class IneDocumentVerifierImpl implements IDocumentVerifier {
         const birthIndex: number = words.indexOf('nacimiento');
         if (birthIndex === -1 || birthIndex + 1 >= words.length) return false;
 
-        const rawDate: string = words[birthIndex + 3];
-        console.log({ words,index:words.indexOf('nacimiento') });
+        const rawDate: string = words[birthIndex + 2];
         const curpDate: string = this.formatToCurpDate(rawDate);
 
         return curp.length === 18 && curp.slice(4, 10) === curpDate;
@@ -90,7 +89,7 @@ export class IneDocumentVerifierImpl implements IDocumentVerifier {
 
     private formatToCurpDate(input: string | number): string {
         const str = input.toString();
-        console.log({input});
+
         if (str.length !== 8) {
             throw new Error('Input must be 8 digits in DDMMYYYY format');
         }
