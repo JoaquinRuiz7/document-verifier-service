@@ -1,16 +1,24 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
+import postgres from 'postgres';
 
 @Entity({ name: 'ine_reliability_report' })
 export class ReliabilityReportEntity {
     @PrimaryGeneratedColumn({ name: 'id' }) private _id: number;
 
-    @Column({ name: 'document_id' }) private _documentId: number;
+    @Column({ name: 'document_id' })
+    private _documentId: number;
 
-    @Column({ name: 'reliability_percentage' }) private _reliabilityPercentage: number;
+    @Column({ name: 'reliability_percentage' })
+    private _reliabilityPercentage: number;
 
-    @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' }) private _createdAt: Date;
+    @Column({ name: 'attempts' })
+    private _attempts: number;
 
-    @UpdateDateColumn({ name: 'updated_at', type: 'timestamp with time zone' }) private _updatedAt: Date;
+    @CreateDateColumn({ name: 'created_at', type: 'timestamp with time zone' })
+    private _createdAt: Date;
+
+    @UpdateDateColumn({ name: 'updated_at', type: 'timestamp with time zone' })
+    private _updatedAt: Date;
 
     get id(): number {
         return this._id;
@@ -50,5 +58,13 @@ export class ReliabilityReportEntity {
 
     set updatedAt(value: Date) {
         this._updatedAt = value;
+    }
+
+    get attempts(): number {
+        return this._attempts;
+    }
+
+    set attempts(value: number) {
+        this._attempts = value;
     }
 }

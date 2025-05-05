@@ -16,14 +16,15 @@ export class DocumentRepository implements IDocumentRepository {
     ) {}
 
     async getDocumentsToProcess(): Promise<LegalDocument[]> {
-        const documents: LegalDocumentEntity[] = await this.documentRepository.find({
-            where: {
-                // @ts-ignore
-                _documentType: DocumentType.INE_IMAGE,
-                _verified: false,
-            },
-            take: 200,
-        });
+        const documents: LegalDocumentEntity[] = await this.documentRepository
+            .createQueryBuilder('uld')
+            .leftJoin('eauction.ine_reliability_report', 'irr', 'uld.id = irr.document_id')
+            .where('uld.document_type = :type', { type: DocumentType.INE_IMAGE })
+            .andWhere('uld.verified = false')
+            .andWhere('uld.is_expired = false')
+            .andWhere('irr.attempts < :maxAttempts', { maxAttempts: 3 })
+            .take(200)
+            .getRawMany();
 
         return documents.map((d: LegalDocumentEntity) => LegalDocumentMapper.toDomain(d));
     }
