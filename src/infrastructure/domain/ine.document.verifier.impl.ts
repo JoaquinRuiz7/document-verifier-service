@@ -91,7 +91,7 @@ export class IneDocumentVerifierImpl implements IDocumentVerifier {
         const str = input.toString();
 
         if (str.length !== 8) {
-            return 'not found';
+            return '';
         }
 
         const day = str.slice(0, 2);
