@@ -30,6 +30,8 @@ export class LegalDocumentMapper {
         domain.isExpired = entity.isExpired;
         domain.updatedAt = entity.updatedAt;
 
+        console.log({domain});
+
         return domain;
     }
 }
