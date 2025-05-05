@@ -1,7 +1,7 @@
 import { IDocumentRepository } from '../../../core/interfaces/repository/i.document.repository';
 import { Inject, Injectable } from '@nestjs/common';
 import { DatabaseConstants } from '../../config/database/database.constants';
-import { Repository } from 'typeorm';
+import { Brackets, Repository } from 'typeorm';
 import { LegalDocument as LegalDocumentEntity } from '../model/legal.document.entity';
 import { LegalDocument } from '../../../core/entities/legal.document';
 import { LegalDocumentMapper } from '../mapper/legal.document.mapper';
@@ -24,6 +24,10 @@ export class DocumentRepository implements IDocumentRepository {
             .andWhere('uld.verified = false')
             .andWhere('uld.is_expired = false')
             .andWhere('irr.attempts < :maxAttempts', { maxAttempts: 3 })
+            .orWhere(new Brackets(qb => {
+                qb.where('irr.attempts < :maxAttempts', { maxAttempts: 3 })
+                  .orWhere('irr.attempts is null')
+            }))
             .take(1)
             .getRawMany();
 
