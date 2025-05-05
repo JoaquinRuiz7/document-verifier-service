@@ -11,13 +11,12 @@ export class LegalDocument {
     private _createdAt: Date;
     private _updatedAt: Date;
 
-
     constructor() {
         this._id = 0;
         this._userId = 0;
         this._documentType = DocumentType.INE_IMAGE;
-        this._key='';
-        this._validUntil =0;
+        this._key = '';
+        this._validUntil = 0;
         this._verified = false;
         this._isExpired = false;
     }

@@ -23,15 +23,14 @@ export class DocumentRepository implements IDocumentRepository {
             .andWhere('uld.verified = false')
             .andWhere('uld.is_expired = false')
             .andWhere('irr.attempts < :maxAttempts', { maxAttempts: 3 })
-            .orWhere(new Brackets(qb => {
-                qb.where('irr.attempts < :maxAttempts', { maxAttempts: 3 })
-                  .orWhere('irr.attempts is null')
-            }))
-          .select(['uld'])
-          .take(1)
-          .getMany();
-
-        console.log({all: documents});
+            .orWhere(
+                new Brackets((qb) => {
+                    qb.where('irr.attempts < :maxAttempts', { maxAttempts: 3 }).orWhere('irr.attempts is null');
+                }),
+            )
+            .select(['uld'])
+            .take(1)
+            .getMany();
 
         return documents.map((entity: LegalDocumentEntity) => LegalDocumentMapper.toDomain(entity));
     }

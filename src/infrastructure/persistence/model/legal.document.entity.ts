@@ -92,5 +92,4 @@ export class LegalDocument {
     set isExpired(value: boolean) {
         this._isExpired = value;
     }
-
 }
