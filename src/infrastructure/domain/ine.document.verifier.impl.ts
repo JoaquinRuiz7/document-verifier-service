@@ -91,7 +91,7 @@ export class IneDocumentVerifierImpl implements IDocumentVerifier {
         const str = input.toString();
 
         if (str.length !== 8) {
-            throw new Error('Input must be 8 digits in DDMMYYYY format');
+            return 'not found';
         }
 
         const day = str.slice(0, 2);
