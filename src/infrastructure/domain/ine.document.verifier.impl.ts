@@ -34,9 +34,9 @@ export class IneDocumentVerifierImpl implements IDocumentVerifier {
         const found: string[] = keywords.filter((kw) => lowerWords.includes(kw.toLowerCase()));
         const missing: string[] = keywords.filter((kw) => !lowerWords.includes(kw.toLowerCase()));
         const isValidCurp: boolean = this.validateCurp(words);
-        const maxScore: number = found.length + 1;
+        const maxScore: number = keywords.length + 1;
         const { lastValidYear } = this.getYears(words);
-        const percentage: number = Math.ceil((maxScore / (isValidCurp ? keywords.length + 1 : keywords.length)) * 100);
+        const percentage: number = Math.ceil((isValidCurp ? (found.length+1):(found.length)*100/maxScore));
 
         return { found, missing, percentage, lastValidYear: Number(lastValidYear), isExpired: this.isExpired(words) };
     }
