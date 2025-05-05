@@ -1,5 +1,4 @@
 import { DocumentType } from '../enums/document.type';
-import postgres from 'postgres';
 
 export class LegalDocument {
     private _id: number;
@@ -11,6 +10,17 @@ export class LegalDocument {
     private _isExpired: boolean;
     private _createdAt: Date;
     private _updatedAt: Date;
+
+
+    constructor() {
+        this._id = 0;
+        this._userId = 0;
+        this._documentType = DocumentType.INE_IMAGE;
+        this._key='';
+        this._validUntil =0;
+        this._verified = false;
+        this._isExpired = false;
+    }
 
     get id(): number {
         return this._id;
@@ -44,22 +54,6 @@ export class LegalDocument {
         this._key = value;
     }
 
-    get createdAt(): Date {
-        return this._createdAt;
-    }
-
-    set createdAt(value: Date) {
-        this._createdAt = value;
-    }
-
-    get updatedAt(): Date {
-        return this._updatedAt;
-    }
-
-    set updatedAt(value: Date) {
-        this._updatedAt = value;
-    }
-
     get validUntil(): number {
         return this._validUntil;
     }
@@ -82,5 +76,21 @@ export class LegalDocument {
 
     set isExpired(value: boolean) {
         this._isExpired = value;
+    }
+
+    get createdAt(): Date {
+        return this._createdAt;
+    }
+
+    set createdAt(value: Date) {
+        this._createdAt = value;
+    }
+
+    get updatedAt(): Date {
+        return this._updatedAt;
+    }
+
+    set updatedAt(value: Date) {
+        this._updatedAt = value;
     }
 }

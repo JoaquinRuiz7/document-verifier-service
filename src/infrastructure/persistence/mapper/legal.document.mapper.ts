@@ -19,6 +19,7 @@ export class LegalDocumentMapper {
     public static toDomain(entity: LegalDocumentEntity): LegalDocument {
         const domain = new LegalDocument();
         console.log({entity});
+
         domain.id = entity.id;
         domain.userId = entity.userId;
         domain.key = entity.documentKey;
@@ -28,6 +29,7 @@ export class LegalDocumentMapper {
         domain.createdAt = entity.createdAt;
         domain.isExpired = entity.isExpired;
         domain.updatedAt = entity.updatedAt;
+
         return domain;
     }
 }

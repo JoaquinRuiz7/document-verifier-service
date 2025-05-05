@@ -27,7 +27,7 @@ export class DocumentRepository implements IDocumentRepository {
             .take(1)
             .getRawMany();
 
-        return documents.map((d: LegalDocumentEntity) => LegalDocumentMapper.toDomain(d));
+        return documents.map((entity: LegalDocumentEntity) => LegalDocumentMapper.toDomain(entity));
     }
 
     async save(legalDocument: LegalDocument): Promise<void> {

@@ -1,6 +1,5 @@
 import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from 'typeorm';
 import { DocumentType } from '../../../core/enums/document.type';
-import postgres from 'postgres';
 
 @Entity({ name: 'user_legal_documents' })
 export class LegalDocument {
@@ -93,4 +92,5 @@ export class LegalDocument {
     set isExpired(value: boolean) {
         this._isExpired = value;
     }
+
 }
