@@ -18,7 +18,6 @@ export class DocumentRepository implements IDocumentRepository {
     async getDocumentsToProcess(): Promise<LegalDocument[]> {
         const documents: LegalDocumentEntity[] = await this.documentRepository
             .createQueryBuilder('uld')
-            .select('uld.*')
             .leftJoin('ine_reliability_report', 'irr', 'uld.id = irr.document_id')
             .where('uld.document_type = :type', { type: DocumentType.INE_IMAGE })
             .andWhere('uld.verified = false')
@@ -28,10 +27,11 @@ export class DocumentRepository implements IDocumentRepository {
                 qb.where('irr.attempts < :maxAttempts', { maxAttempts: 3 })
                   .orWhere('irr.attempts is null')
             }))
-            .take(1)
-            .getRawMany();
+          .select(['uld'])
+          .take(1)
+          .getMany();
 
-        console.log({raw: documents});
+        console.log({all: documents});
 
         return documents.map((entity: LegalDocumentEntity) => LegalDocumentMapper.toDomain(entity));
     }
