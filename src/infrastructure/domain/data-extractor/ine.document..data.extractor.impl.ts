@@ -18,7 +18,6 @@ export class IneDocumentDataExtractorImpl extends DocumentDataExtractor {
         return expirationDate;
     }
 
-
     isExpired(extractedWords: string[]): boolean {
         const { emissionYear, lastValidYear } = IneUtils.getYears(extractedWords);
         if (!emissionYear || !lastValidYear || isNaN(parseInt(emissionYear)) || isNaN(parseInt(lastValidYear))) {

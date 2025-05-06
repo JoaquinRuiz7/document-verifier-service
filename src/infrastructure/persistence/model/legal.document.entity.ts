@@ -13,7 +13,7 @@ export class LegalDocument {
     private _documentKey: string;
     @Column({ name: 'verified' })
     private _verified: boolean;
-    @Column({ name: 'valid_until',type: 'date' })
+    @Column({ name: 'valid_until', type: 'date' })
     private _validUntil: Date;
     @Column({ name: 'is_expired' })
     private _isExpired: boolean;

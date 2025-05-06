@@ -9,9 +9,7 @@ import { IStorage } from '../../../core/interfaces/storage/i.storage';
 import { IDocumentVerifier } from '../../../core/interfaces/domain/i.document.verifier';
 import { IneDocumentVerifier } from '../../domain/ine.document.verifier';
 import { S3Storage } from '../../storage/s3.storage';
-import {
-    IOpticalCharacterRecognitionProcessor,
-} from '../../../core/interfaces/domain/i.optical.character.recognition.processor';
+import { IOpticalCharacterRecognitionProcessor } from '../../../core/interfaces/domain/i.optical.character.recognition.processor';
 import { TesseractIOpticalCharacterRecognitionImpl } from '../../domain/tesseract.optical.character.recognition.impl';
 import { IDocumentDataExtractor } from '../../../core/interfaces/domain/i.document.data.extractor';
 import { IneDocumentDataExtractorImpl } from '../../domain/data-extractor/ine.document..data.extractor.impl';
@@ -90,5 +88,5 @@ export const processDocumentProvider = [
     documentRepositoryProvider,
     iOpticalCharacterRecognitionProcessor,
     documentDataExtractor,
-    documentDataExtractorProvider
+    documentDataExtractorProvider,
 ];
