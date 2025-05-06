@@ -8,6 +8,7 @@ export class HasValidCurpVerificationImpl implements IVerification {
         const curp: string = extractedWords[curpIndex + 1].toUpperCase();
 
         const birthIndex: number = extractedWords.indexOf('nacimiento');
+        console.log(extractedWords);
         if (birthIndex === -1 || birthIndex + 1 >= extractedWords.length) return false;
         const rawDate: string = extractedWords[birthIndex + 3];
         const curpDate: string = this.formatToCurpDate(rawDate);

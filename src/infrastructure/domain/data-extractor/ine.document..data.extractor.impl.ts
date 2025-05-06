@@ -4,15 +4,20 @@ import { IneUtils } from '../ine.utils';
 export class IneDocumentDataExtractorImpl extends DocumentDataExtractor {
     extractExpirationDate(extractedWords: string[]): Date {
         const { lastValidYear } = IneUtils.getYears(extractedWords);
+
         if (!lastValidYear) {
             throw new Error('Invalid date');
         }
-        return new Date(lastValidYear as string);
+
+        const expirationDate = new Date(Number(lastValidYear), 0, 1);
+
+        if (isNaN(expirationDate.getTime())) {
+            throw new Error('Invalid date');
+        }
+
+        return expirationDate;
     }
 
-    extractHoldersName(extractedWords: string[]): string {
-        throw new Error('Method not implemented.');
-    }
 
     isExpired(extractedWords: string[]): boolean {
         const { emissionYear, lastValidYear } = IneUtils.getYears(extractedWords);

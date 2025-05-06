@@ -5,7 +5,7 @@ export class LegalDocument {
     private _userId: number;
     private _documentType: DocumentType;
     private _key: string;
-    private _validUntil: number;
+    private _validUntil: Date;
     private _verified: boolean;
     private _isExpired: boolean;
     private _createdAt: Date;
@@ -16,7 +16,7 @@ export class LegalDocument {
         this._userId = 0;
         this._documentType = DocumentType.INE_IMAGE;
         this._key = '';
-        this._validUntil = 0;
+        this._validUntil = new Date();
         this._verified = false;
         this._isExpired = false;
     }
@@ -53,11 +53,11 @@ export class LegalDocument {
         this._key = value;
     }
 
-    get validUntil(): number {
+    get validUntil(): Date {
         return this._validUntil;
     }
 
-    set validUntil(value: number) {
+    set validUntil(value: Date) {
         this._validUntil = value;
     }
 
