@@ -2,17 +2,17 @@ import { DocumentDataExtractor } from '../../../core/interfaces/domain/document.
 import { IneUtils } from '../ine.utils';
 
 export class IneDocumentDataExtractorImpl extends DocumentDataExtractor {
-    extractExpirationDate(extractedWords: string[]): Date {
+    extractExpirationDate(extractedWords: string[]): Date | null {
         const { lastValidYear } = IneUtils.getYears(extractedWords);
 
         if (!lastValidYear) {
-            throw new Error('Invalid date');
+            return null;
         }
 
         const expirationDate = new Date(Number(lastValidYear), 0, 1);
 
         if (isNaN(expirationDate.getTime())) {
-            throw new Error('Invalid date');
+            return null;
         }
 
         return expirationDate;

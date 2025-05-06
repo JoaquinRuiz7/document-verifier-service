@@ -12,6 +12,6 @@ export abstract class DocumentDataExtractor implements IDocumentDataExtractor {
         };
     }
 
-    abstract extractExpirationDate(extractedWords: string[]): Date;
+    abstract extractExpirationDate(extractedWords: string[]): Date | null;
     abstract isExpired(extractedWords: string[]): boolean;
 }
