@@ -12,13 +12,13 @@ export class HasValidCurpVerificationImpl implements IVerification {
         if (birthIndex === -1 || birthIndex + 1 >= extractedWords.length) return false;
         const rawDate: string = extractedWords[birthIndex + 3];
         const curpDate: string = this.formatToCurpDate(rawDate);
-
+        console.log({curpDate,sliceCurp:curp.slice(4, 10)});
         return curp.length === 18 && curp.slice(4, 10) === curpDate;
     }
 
     private formatToCurpDate(input: string | number): string {
         const str: string = input.toString();
-
+        console.log({str});
         if (str.length !== 8) {
             return '';
         }
