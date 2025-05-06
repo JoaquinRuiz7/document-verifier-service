@@ -2,8 +2,16 @@ export class IneReliabilityReport {
     private _id: number;
     private _documentId: number;
     private _reliabilityPercentage: number;
+    private _attempts: number;
     private _createdAt: Date;
     private _updatedAt: Date;
+
+    constructor() {
+        this._id = 0;
+        this._documentId = 0;
+        this._reliabilityPercentage = 0;
+        this._attempts = 0;
+    }
 
     get id(): number {
         return this._id;
@@ -43,5 +51,13 @@ export class IneReliabilityReport {
 
     set updatedAt(value: Date) {
         this._updatedAt = value;
+    }
+
+    get attempts(): number {
+        return this._attempts;
+    }
+
+    set attempts(value: number) {
+        this._attempts = value;
     }
 }

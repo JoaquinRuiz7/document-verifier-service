@@ -19,11 +19,17 @@ export class VerifyIneDocumentUseCaseImpl implements IVerifyDocumentUseCase {
         const documentData: Buffer = await this.storage.getObject(document.key);
         const score: ConfidenceScore = await this.documentVerifier.verify(documentData);
 
-        const reliabilityReport: IneReliabilityReport = new IneReliabilityReport();
+        let foundReliabilityReport: IneReliabilityReport | null =
+            await this.reliabilityReportRepository.findByDocumentId(document.id);
+        const reliabilityReport: IneReliabilityReport = foundReliabilityReport
+            ? foundReliabilityReport
+            : new IneReliabilityReport();
+        
         reliabilityReport.documentId = documentId;
         reliabilityReport.reliabilityPercentage = score.confidence;
+        reliabilityReport.attempts++;
 
-        this.reliabilityReportRepository.save(reliabilityReport);
+        await this.reliabilityReportRepository.save(reliabilityReport);
 
         document.verified = score.confidence >= 90;
 

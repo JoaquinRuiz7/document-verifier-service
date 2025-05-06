@@ -10,7 +10,7 @@ export class HasValidCurpVerificationImpl implements IVerification {
         const birthIndex: number = extractedWords.indexOf('nacimiento');
         if (birthIndex === -1 || birthIndex + 1 >= extractedWords.length) return false;
 
-        const rawDate: string = extractedWords[birthIndex + 3];
+        const rawDate: string = extractedWords[birthIndex + 2];
         const curpDate: string = this.formatToCurpDate(rawDate);
 
         return curp.length === 18 && curp.slice(4, 10) === curpDate;
@@ -19,7 +19,7 @@ export class HasValidCurpVerificationImpl implements IVerification {
     private formatToCurpDate(input: string | number): string {
         const str: string = input.toString();
         if (str.length !== 8) {
-            throw new Error('Input must be 8 digits in DDMMYYYY format');
+            return '';
         }
 
         const day: string = str.slice(0, 2);

@@ -7,6 +7,13 @@ export class IneJobService implements IJobService {
     constructor(@InjectQueue(Queues.PROCESS_INE) private readonly ineProcessorQueue: Queue) {}
 
     async enqueue(data: any): Promise<void> {
-        await this.ineProcessorQueue.add(`verify-document-${data.documentId}`, data);
+        await this.ineProcessorQueue.add(`verify-document-${data.documentId}`, data, {
+            attempts: 4,
+            backoff: {
+                type: 'exponential',
+                delay: 1000,
+            },
+            removeOnComplete: true,
+        });
     }
 }

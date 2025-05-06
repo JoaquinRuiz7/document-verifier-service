@@ -11,6 +11,17 @@ sudo docker volume prune -f || true
 # Clear out any large core dumps or forgotten files
 sudo find / -type f -name 'core' -exec rm -f {} + 2>/dev/null || true
 
+echo "🚨 Emergency space clearing to allow apt to work..."
+# Delete npm and PM2 logs first
+sudo rm -rf ~/.npm/_* ~/.cache/* ~/.pm2/logs/*
+
+# Clean up Docker images if used
+sudo docker system prune -af || true
+sudo docker volume prune -f || true
+
+# Clear out any large core dumps or forgotten files
+sudo find / -type f -name 'core' -exec rm -f {} + 2>/dev/null || true
+
 echo "🧹 Starting general cleanup..."
 # Basic cleanup before installation
 sudo rm -rf /tmp/* /var/tmp/*
@@ -22,6 +33,8 @@ npm cache clean --force || true
 sudo apt-get clean || true
 sudo apt-get autoclean || true
 sudo apt-get autoremove --purge -y || true
+
+echo "🧹 Cleanup complete. Continuing with setup..."
 
 echo "🧹 Cleanup complete. Continuing with setup..."
 
