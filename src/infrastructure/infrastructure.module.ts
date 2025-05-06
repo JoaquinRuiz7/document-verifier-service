@@ -5,9 +5,10 @@ import { IneVerifyScheduler } from './scheduler/ine.verify.scheduler';
 import { enqueueInesToVerifyProvider } from './providers/usecases/enqueue.ines.to.verify.provider';
 import { BullModule } from '@nestjs/bullmq';
 import { Queue } from './enums/queue';
-import { analyzeKeywordsProvider } from './providers/services/analyze.keywords.service.provider';
-import { verifyDocumentProvider } from './providers/usecases/verify.document.usecase.provider';
 import { VerifyIneConsumer } from './consumers/verify.ine.consumer';
+import { DoocumentsController } from './doocuments/doocuments.controller';
+import { S3Provider } from './storage/s3.provider';
+import { processDocumentProvider } from './providers/usecases/process.documentUseCaseProvider';
 
 @Module({
     imports: [
@@ -17,13 +18,14 @@ import { VerifyIneConsumer } from './consumers/verify.ine.consumer';
             name: Queue.PROCESS_INE,
         }),
     ],
-    exports: [...enqueueInesToVerifyProvider, ...analyzeKeywordsProvider, ...verifyDocumentProvider],
+    exports: [...enqueueInesToVerifyProvider, ...processDocumentProvider, S3Provider],
     providers: [
         ...enqueueInesToVerifyProvider,
-        ...analyzeKeywordsProvider,
-        ...verifyDocumentProvider,
+        ...processDocumentProvider,
         IneVerifyScheduler,
         VerifyIneConsumer,
+        S3Provider,
     ],
+    controllers: [DoocumentsController],
 })
 export class InfrastructureModule {}

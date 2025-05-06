@@ -43,7 +43,6 @@ export class TesseractIOpticalCharacterRecognitionImpl implements IOpticalCharac
         return this.orderedWords;
     }
 
-    // @ts-ignore
     cleanAndOrderWords(text: string): string[] {
         return text
             .split(/\s+/)

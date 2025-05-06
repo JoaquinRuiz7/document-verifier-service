@@ -13,8 +13,8 @@ export class LegalDocument {
     private _documentKey: string;
     @Column({ name: 'verified' })
     private _verified: boolean;
-    @Column({ name: 'valid_until' })
-    private _validUntil: number;
+    @Column({ name: 'valid_until', type: 'date' })
+    private _validUntil: Date;
     @Column({ name: 'is_expired' })
     private _isExpired: boolean;
 
@@ -77,11 +77,11 @@ export class LegalDocument {
         return this._verified;
     }
 
-    get validUntil(): number {
+    get validUntil(): Date {
         return this._validUntil;
     }
 
-    set validUntil(value: number) {
+    set validUntil(value: Date) {
         this._validUntil = value;
     }
 
