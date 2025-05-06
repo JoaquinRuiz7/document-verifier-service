@@ -3,5 +3,5 @@ export type DocumentData = {
     isExpired: boolean;
 };
 export interface IDocumentDataExtractor {
-    extractData(document: Buffer): Promise<DocumentData >;
+    extractData(document: Buffer): Promise<DocumentData>;
 }
