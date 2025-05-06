@@ -1,4 +1,4 @@
-import { IVerification } from '../../core/interfaces/domain/i.verification';
+import { IVerification } from '../../../core/interfaces/domain/i.verification';
 
 export class HasFaceVerification implements IVerification {
     verify(extractedWords: string[]): boolean {

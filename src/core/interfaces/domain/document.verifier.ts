@@ -3,7 +3,7 @@ import { ConfidenceScore, IDocumentVerifier } from './i.document.verifier';
 import { IOpticalCharacterRecognitionProcessor } from './i.optical.character.recognition.processor';
 
 export abstract class DocumentVerifier implements IDocumentVerifier {
-    protected constructor(protected readonly ocr: IOpticalCharacterRecognitionProcessor) {}
+    public constructor(protected readonly ocr: IOpticalCharacterRecognitionProcessor) {}
 
     async verify(document: Buffer): Promise<ConfidenceScore> {
         const verifications: IVerification[] = this.getVerifications();
@@ -18,7 +18,7 @@ export abstract class DocumentVerifier implements IDocumentVerifier {
         });
 
         return {
-            confidence: (confidenceScoreSum * 100) / maxScore,
+            confidence: Math.ceil((confidenceScoreSum * 100) / maxScore),
         };
     }
 

@@ -24,7 +24,7 @@ export class VerifyIneDocumentUseCaseImpl implements IVerifyDocumentUseCase {
         const reliabilityReport: IneReliabilityReport = foundReliabilityReport
             ? foundReliabilityReport
             : new IneReliabilityReport();
-        
+
         reliabilityReport.documentId = documentId;
         reliabilityReport.reliabilityPercentage = score.confidence;
         reliabilityReport.attempts++;

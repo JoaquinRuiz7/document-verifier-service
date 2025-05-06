@@ -1,4 +1,4 @@
-import { IVerification } from '../../core/interfaces/domain/i.verification';
+import { IVerification } from '../../../core/interfaces/domain/i.verification';
 
 export class IneKeywordsVerification implements IVerification {
     private readonly KEY_WORDS: string[] = [

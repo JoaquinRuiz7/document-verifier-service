@@ -1,4 +1,4 @@
-import { IVerification } from '../../core/interfaces/domain/i.verification';
+import { IVerification } from '../../../core/interfaces/domain/i.verification';
 
 export class HasValidCurpVerificationImpl implements IVerification {
     verify(extractedWords: string[]): boolean {
@@ -9,8 +9,7 @@ export class HasValidCurpVerificationImpl implements IVerification {
 
         const birthIndex: number = extractedWords.indexOf('nacimiento');
         if (birthIndex === -1 || birthIndex + 1 >= extractedWords.length) return false;
-
-        const rawDate: string = extractedWords[birthIndex + 2];
+        const rawDate: string = extractedWords[birthIndex + 3];
         const curpDate: string = this.formatToCurpDate(rawDate);
 
         return curp.length === 18 && curp.slice(4, 10) === curpDate;
@@ -18,6 +17,7 @@ export class HasValidCurpVerificationImpl implements IVerification {
 
     private formatToCurpDate(input: string | number): string {
         const str: string = input.toString();
+
         if (str.length !== 8) {
             return '';
         }
