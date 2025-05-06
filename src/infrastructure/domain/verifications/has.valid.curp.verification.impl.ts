@@ -7,26 +7,20 @@ export class HasValidCurpVerificationImpl implements IVerification {
 
         const curp: string = extractedWords[curpIndex + 1].toUpperCase();
 
-        const birthIndex: number = extractedWords.indexOf('nacimiento');
-
-        if (birthIndex === -1 || birthIndex + 1 >= extractedWords.length) return false;
-        const rawDate: string = extractedWords[birthIndex + 3];
+        const datePattern = /\b(0[1-9]|[12][0-9]|3[01])(0[1-9]|1[0-2])\d{4}\b/;
+        const rawDate: string | undefined = extractedWords.find((word) => datePattern.test(word));
         const curpDate: string = this.formatToCurpDate(rawDate);
-        console.log({curpDate,sliceCurp:curp.slice(4, 10)});
+
         return curp.length === 18 && curp.slice(4, 10) === curpDate;
     }
 
-    private formatToCurpDate(input: string | number): string {
-        const str: string = input.toString();
-        console.log({str});
-        if (str.length !== 8) {
-            return '';
-        }
+    private formatToCurpDate(input: string | undefined): string {
+        if (!input) return '';
 
-        const day: string = str.slice(0, 2);
-        const month: string = str.slice(2, 4);
-        const year: string = str.slice(4, 8);
+        const day: string = input.slice(0, 2);
+        const month: string = input.slice(2, 4);
+        const year: string = input.slice(4, 8);
 
-        return year.slice(2) + month + day;
+        return year.slice(2) + month + day; // Format: YYMMDD
     }
 }

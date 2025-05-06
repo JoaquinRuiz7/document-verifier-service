@@ -35,7 +35,7 @@ export class ProcessIneDocumentUseCaseImpl implements IProcessDocumentUseCase {
         const documentInformation: DocumentData = await this.documentDataExtractor.extractData(documentData);
         document.verified = score.confidence >= 90;
         document.isExpired = documentInformation.isExpired;
-        document.validUntil = documentInformation.expirationDate;
+        document.validUntil = documentInformation.expirationDate!;
 
         await this.documentRepository.save(document);
         return { confidence: score.confidence };
