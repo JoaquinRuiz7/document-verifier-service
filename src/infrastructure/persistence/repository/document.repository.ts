@@ -31,20 +31,6 @@ export class DocumentRepository implements IDocumentRepository {
             .take(200)
             .getMany();
 
-        const query = this.documentRepository
-            .createQueryBuilder('uld')
-            .leftJoin('ine_reliability_report', 'irr', 'uld.id = irr.document_id')
-            .where('uld.document_type = :type', { type: DocumentType.INE_IMAGE })
-            .andWhere('uld.verified = false')
-            .andWhere('uld.is_expired = false')
-            .andWhere(
-                new Brackets((qb) => {
-                    qb.where('irr.attempts < :maxAttempts', { maxAttempts: 3 }).orWhere('irr.attempts is null');
-                }),
-            )
-            .select(['uld'])
-            .take(200);
-
         return documents.map((entity: LegalDocumentEntity) => LegalDocumentMapper.toDomain(entity));
     }
 

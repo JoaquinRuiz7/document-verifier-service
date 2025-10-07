@@ -1,5 +1,7 @@
 import { createWorker } from 'tesseract.js';
-import { IOpticalCharacterRecognitionProcessor } from '../../core/interfaces/domain/i.optical.character.recognition.processor';
+import {
+    IOpticalCharacterRecognitionProcessor,
+} from '../../core/interfaces/domain/i.optical.character.recognition.processor';
 import { Injectable } from '@nestjs/common';
 import * as sharp from 'sharp';
 
@@ -9,22 +11,24 @@ export class TesseractIOpticalCharacterRecognitionImpl implements IOpticalCharac
 
     async preProcess(imageBuffer: Buffer): Promise<Buffer> {
         return await sharp(imageBuffer)
-            .resize({ width: 1200, withoutEnlargement: true })
-            .greyscale()
-            .normalize()
-            .toFormat('png')
-            .toBuffer();
+          .resize({ width: 1600, withoutEnlargement: true })
+          .greyscale()
+          .threshold(180) // binarize to clean background noise
+          .normalize()
+          .median(1) // light denoise
+          .toFormat('png')
+          .toBuffer();
     }
 
     async readImageAndExtractText(image: Buffer): Promise<string[]> {
         const enhancedImage: Buffer = await this.preProcess(image);
 
-        const worker = await createWorker('spa');
+        const worker = await createWorker(['spa', 'eng']);
 
         try {
             await worker.setParameters({
                 // @ts-ignore
-                tessedit_pageseg_mode: '3',
+                tessedit_pageseg_mode: '6',
                 preserve_interword_spaces: '1',
             });
 
