@@ -30,6 +30,7 @@ export class IneKeywordsVerification implements IVerification {
         const lowerExtractedWords: string[] = extractedWords.map((w) => w.toLowerCase());
         const found: string[] = this.KEY_WORDS.filter((kw) => lowerExtractedWords.includes(kw.toLowerCase()));
         const percentage: number = Math.ceil((found.length / this.KEY_WORDS.length) * 100);
+        console.log({percentage})
         return percentage > 90;
     }
 }

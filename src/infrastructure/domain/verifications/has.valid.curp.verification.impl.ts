@@ -2,6 +2,7 @@ import { IVerification } from '../../../core/interfaces/domain/i.verification';
 
 export class HasValidCurpVerificationImpl implements IVerification {
     verify(extractedWords: string[]): boolean {
+        console.log({extractedWords});
         // Normalize all words: remove symbols, uppercase, trim
         const normalizedWords = extractedWords.map((w) =>
           w.replace(/[^A-Z0-9]/gi, '').toUpperCase()
