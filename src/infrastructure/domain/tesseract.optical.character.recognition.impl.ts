@@ -11,24 +11,22 @@ export class TesseractIOpticalCharacterRecognitionImpl implements IOpticalCharac
 
     async preProcess(imageBuffer: Buffer): Promise<Buffer> {
         return await sharp(imageBuffer)
-          .resize({ width: 1600, withoutEnlargement: true })
-          .greyscale()
-          .threshold(180) // binarize to clean background noise
-          .normalize()
-          .median(1) // light denoise
-          .toFormat('png')
-          .toBuffer();
+            .resize({ width: 1200, withoutEnlargement: true })
+            .greyscale()
+            .normalize()
+            .toFormat('png')
+            .toBuffer();
     }
 
     async readImageAndExtractText(image: Buffer): Promise<string[]> {
         const enhancedImage: Buffer = await this.preProcess(image);
 
-        const worker = await createWorker(['spa', 'eng']);
+        const worker = await createWorker('spa');
 
         try {
             await worker.setParameters({
                 // @ts-ignore
-                tessedit_pageseg_mode: '6',
+                tessedit_pageseg_mode: '3',
                 preserve_interword_spaces: '1',
             });
 
